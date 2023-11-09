@@ -1,2 +1,2 @@
-# HAR-review
-literature review on various papers on HAR
+HAR Project - Human Activity Recognition
+ACM preinternship project 2023
