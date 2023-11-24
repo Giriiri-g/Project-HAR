@@ -9,5 +9,10 @@ Pre-requisites:
   • opencv
   • numpy
 
-You need to dowwload a resnet-34_kinetics.onnx model from [here](https://www.dropbox.com/s/065l4vr8bptzohb/resnet-34_kinetics.onnx?dl=1) and once downloaded drop it inside the model directory of our project (shown in directory structure)
+You need to download a resnet-34_kinetics.onnx model from [here](https://www.dropbox.com/s/065l4vr8bptzohb/resnet-34_kinetics.onnx?dl=1) and once downloaded drop it inside the model directory of our project (shown in directory structure)
 
+Cite
+Chaitanya Sonavane [July 2020]
+Kay et al.’s 2017 paper, The Kinetics Human Action Video Dataset.
+Hara et al.’s 2018 CVPR paper, Can Spatiotemporal 3D CNNs Retrace the History of 2D CNNs and ImageNet?
+OpenCV's Action Recognition Example
