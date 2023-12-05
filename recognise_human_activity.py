@@ -10,8 +10,8 @@ class Parameters:
         self.CLASSES = open("model/action_recognition_kinetics.txt"
                             ).read().strip().split("\n")
         self.ACTION_RESNET = 'model/resnet-34_kinetics.onnx'
-        self.VIDEO_PATH = None
-#        self.VIDEO_PATH = "test/Clapping (1).mp4"
+       # self.VIDEO_PATH = None
+        self.VIDEO_PATH = "test/example1.mp4"
         # SAMPLE_DURATION is maximum deque size
         self.SAMPLE_DURATION = 16
         self.SAMPLE_SIZE = 112
