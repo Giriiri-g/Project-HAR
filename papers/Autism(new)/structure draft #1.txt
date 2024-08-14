@@ -1,0 +1,18 @@
+Draft #1
+_________
+
+Introduction
+overview of ASD diagnosis
+challenges and limitation of traditional approach
+multi model data fusion tech for asd diag
+advntgs of MMDFT
+data sources of MMDFT
+IoT based approach
+challenges in MMDFT
+data representation -> feature representation
+curse of huge data amount
+objective assessment of behavorial symptoms
+review of MMDFT
+model evaluations
+theoretical vs experimental -> limitations in real world appl
+research priorities and future directions
