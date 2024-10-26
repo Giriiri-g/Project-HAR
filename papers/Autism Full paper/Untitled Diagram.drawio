@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" version="24.8.3">
   <diagram name="Page-1" id="oWpQuyWsI5b6c9RrgGSJ">
-    <mxGraphModel dx="3183" dy="1264" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2600" dy="948" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -54,17 +54,23 @@
             <mxPoint x="1580" y="585" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="IlLakzSX_48Vmid3Y2EE-18" value="&lt;h1&gt;&lt;br&gt;&lt;/h1&gt;" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=110;" vertex="1" parent="1">
-          <mxGeometry x="1362" y="195" width="140" height="710" as="geometry" />
-        </mxCell>
-        <mxCell id="IlLakzSX_48Vmid3Y2EE-19" value="&lt;h1&gt;FUSION LAYER&lt;/h1&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="1343" y="550" width="150" height="30" as="geometry" />
-        </mxCell>
         <mxCell id="IlLakzSX_48Vmid3Y2EE-25" value="&lt;h1&gt;&lt;font style=&quot;font-size: 35px;&quot;&gt;ASD&lt;/font&gt;&lt;/h1&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="1580" y="310" width="100" height="40" as="geometry" />
         </mxCell>
         <mxCell id="IlLakzSX_48Vmid3Y2EE-26" value="&lt;h1&gt;&lt;font style=&quot;font-size: 35px;&quot;&gt;TD&lt;/font&gt;&lt;/h1&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="1581" y="724" width="109" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="IlLakzSX_48Vmid3Y2EE-27" value="&lt;h1&gt;&lt;font style=&quot;font-size: 35px;&quot;&gt;Preprocessing&lt;/font&gt;&lt;/h1&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="420" y="1000" width="310" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="IlLakzSX_48Vmid3Y2EE-28" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="1379" y="195" width="159" height="710" as="geometry" />
+        </mxCell>
+        <mxCell id="IlLakzSX_48Vmid3Y2EE-18" value="&lt;h1&gt;&lt;br&gt;&lt;/h1&gt;" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;size=110;" vertex="1" parent="IlLakzSX_48Vmid3Y2EE-28">
+          <mxGeometry x="19" width="140" height="710" as="geometry" />
+        </mxCell>
+        <mxCell id="IlLakzSX_48Vmid3Y2EE-19" value="&lt;h1&gt;FUSION LAYER&lt;/h1&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="IlLakzSX_48Vmid3Y2EE-28">
+          <mxGeometry y="355" width="150" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
