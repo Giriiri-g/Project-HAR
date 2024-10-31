@@ -7,9 +7,6 @@ MRI : Neuroanatomical correlates of autism spectrum disorders: A meta-analysis o
 
 EEG : Electroencephalography (EEG) signal processing for epilepsy and autism spectrum disorder diagnosis
 
-ET : Eye Tracking Young Children with Autism 10.3791/3675 or Using head-mounted eye tracking to examine visual and manual exploration during naturalistic toy play in children with and without autism spectrum disorder
-Julia R. Yurkovic
-
 FER : Atypical Facial Emotion Recognition in Children with Autism Spectrum Disorders: Exploratory Analysis on the Role of Task Demands - Emese Nagy
 
 Skeletal : PGCN-TCA : Pseudo GraphConvolutional Network with Temporaland Channel-wise Attention forSkeleton-based Action Recognition - HONGYE YANG
