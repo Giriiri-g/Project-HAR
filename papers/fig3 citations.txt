@@ -1,0 +1,19 @@
+wearable watch img : Detection of Challenging Behaviours of Children with Autism Using
+Wearable Sensors during Interactions with Social Robots
+
+glove img : Wearable Technology Design for Autism Spectrum Disorders - Sumin Helen Koo
+ 
+MRI : Neuroanatomical correlates of autism spectrum disorders: A meta-analysis of structural magnetic resonance imaging (MRI) studies -Antonio Del Casale 
+
+EEG : Electroencephalography (EEG) signal processing for epilepsy and autism spectrum disorder diagnosis
+
+FER : Atypical Facial Emotion Recognition in Children with Autism Spectrum Disorders: Exploratory Analysis on the Role of Task Demands - Emese Nagy
+
+Skeletal : PGCN-TCA : Pseudo GraphConvolutional Network with Temporaland Channel-wise Attention forSkeleton-based Action Recognition - HONGYE YANG
+
+Gait : Distinguishing Tip-Toe Walking from Normal
+Walking Using Skeleton Data Gathered By 3D
+Sensors
+
+ET : Learning Visual Attention to Identify People with Autism Spectrum Disorder
+ 
