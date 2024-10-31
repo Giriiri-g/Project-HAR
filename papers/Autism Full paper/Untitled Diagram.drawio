@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" version="24.8.3">
   <diagram name="Page-1" id="oWpQuyWsI5b6c9RrgGSJ">
-    <mxGraphModel dx="3500" dy="1897" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1909" dy="1035" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -178,7 +178,7 @@
         <mxCell id="F9IWeQtbQG9jZL5gSi-w-6" value="&lt;h1&gt;&lt;font style=&quot;font-size: 27px;&quot;&gt;MSTCN+ Network&lt;/font&gt;&lt;/h1&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
           <mxGeometry x="1028.7" y="484.13" width="230.78" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="F9IWeQtbQG9jZL5gSi-w-10" value="" style="shape=image;imageAspect=0;aspect=fixed;verticalLabelPosition=bottom;verticalAlign=top;image=https://www.researchgate.net/publication/359813468/figure/fig1/AS:1142441289744394@1649390637539/The-original-VGG-16-architecture-Simonyan-et-Zisserman-2014.ppm;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+        <mxCell id="F9IWeQtbQG9jZL5gSi-w-10" value="" style="shape=image;imageAspect=0;aspect=fixed;verticalLabelPosition=bottom;verticalAlign=top;image=https://www.researchgate.net/publication/359813468/figure/fig1/AS:1142441289744394@1649390637539/The-original-VGG-16-architecture-Simonyan-et-Zisserman-2014.ppm;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="1" vertex="1">
           <mxGeometry x="796" y="695" width="469.84" height="281" as="geometry" />
         </mxCell>
         <mxCell id="F9IWeQtbQG9jZL5gSi-w-11" value="&lt;h1&gt;&lt;font style=&quot;font-size: 27px;&quot;&gt;VGG-16&lt;/font&gt;&lt;/h1&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
