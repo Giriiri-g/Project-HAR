@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Page</title>
+    <link rel="stylesheet" href="tset.css">
+    <script>
+        const questions = [
+    "Question 1: I prefer to do things with others rather than on my own.",
+    "Question 2: I prefer to do things the same way over and over again.",
+    "Question 3: If I try to imagine something, I find it very easy to create a picture in my mind.",
+    "Question 4: I frequently get so strongly absorbed in one thing that I lose sight of other things.",
+    "Question 5: I often notice small sounds when others do not.",
+    "Question 6: I usually notice car number plates or similar strings of information.",
+    "Question 7: Other people frequently tell me that what I have said is impolite, even though I think it is polite.",
+    "Question 8: When I’m reading a story, I can easily imagine what the characters might look like.",
+    "Question 9: I am fascinated by dates.",
+    "Question 10: In a social group, I can easily keep track of several different people’s conversations.",
+    "Question 11: I find social situations easy.",
+    "Question 12: I tend to notice details that others do not.",
+    "Question 13: I would rather go to a library than a party.",
+    "Question 14: I find making up stories easy.",
+    "Question 15: I find myself drawn more strongly to people than to things.",
+    "Question 16: I tend to have very strong interests, which I get upset about if I can’t pursue.",
+    "Question 17: I enjoy social chit-chat.",
+    "Question 18: When I talk, it isn’t always easy for others to get a word in edgeways.",
+    "Question 19: I am fascinated by numbers.",
+    "Question 20: When I’m reading a story, I find it difficult to work out the characters’ intentions.",
+    "Question 21: I don’t particularly enjoy reading fiction.",
+    "Question 22: I find it hard to make new friends.",
+    "Question 23: I notice patterns in things all the time.",
+    "Question 24: I would rather go to the theatre than a museum.",
+    "Question 25: It does not upset me if my daily routine is disturbed.",
+    "Question 26: I frequently find that I don’t know how to keep a conversation going.",
+    "Question 27: I find it easy to ‘read between the lines’ when someone is talking to me.",
+    "Question 28: I usually concentrate more on the whole picture, rather than the small details.",
+    "Question 29: I am not very good at remembering phone numbers.",
+    "Question 30: I don’t usually notice small changes in a situation or a person’s appearance.",
+    "Question 31: I know how to tell if someone listening to me is getting bored.",
+    "Question 32: I find it easy to do more than one thing at once.",
+    "Question 33: When I talk on the phone, I’m not sure when it’s my turn to speak.",
+    "Question 34: I enjoy doing things spontaneously.",
+    "Question 35: I am often the last to understand the point of a joke.",
+    "Question 36: I find it easy to work out what someone is thinking or feeling just by looking at their face.",
+    "Question 37: If there is an interruption, I can switch back to what I was doing very quickly.",
+    "Question 38: I am good at social chit-chat.",
+    "Question 39: People often tell me that I keep going on and on about the same thing.",
+    "Question 40: When I was young, I used to enjoy playing games involving pretending with other children.",
+    "Question 41: I like to collect information about categories of things (e.g., types of cars, birds, trains, or plants).",
+    "Question 42: I find it difficult to imagine what it would be like to be someone else.",
+    "Question 43: I like to carefully plan any activities I participate in.",
+    "Question 44: I enjoy social occasions.",
+    "Question 45: I find it difficult to work out people’s intentions.",
+    "Question 46: New situations make me anxious.",
+    "Question 47: I enjoy meeting new people.",
+    "Question 48: I am a good diplomat.",
+    "Question 49: I am not very good at remembering people’s date of birth.",
+    "Question 50: I find it very easy to play games with children that involve pretending."
+];
+
+        let currentQuestionIndex = 0;
+
+        function displayQuestion() {
+            const questionElement = document.getElementById('question');
+            questionElement.textContent = questions[currentQuestionIndex];
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion();
+            }
+        }
+
+        window.onload = displayQuestion;
+    </script>
+</head>
+<body>
+    <div class="center">
+        <h2 id="question"></h2>
+        <div class="options">
+            <button class="option-button">Definitely Agree</button>
+            <button class="option-button">Slightly Agree</button>
+            <button class="option-button">Slightly Disagree</button>
+            <button class="option-button">Definitely Disagree</button>
+        </div>
+        <div class="navigation">
+            <button onclick="previousQuestion()">Previous</button>
+            <button onclick="nextQuestion()">Next</button>
+        </div>
+    </div>
+</body>
+</html>
