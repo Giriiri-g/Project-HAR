@@ -1,0 +1,1428 @@
+\documentclass{ieeetj}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx,color}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{hidelinks=true}
+\usepackage{algorithm,algorithmic}
+\usepackage{bm}
+\usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage[font=footnotesize,labelfont=bf]{subfig}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{url}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\AtBeginDocument{\definecolor{tmlcncolor}{cmyk}{0.93,0.59,0.15,0.02}\definecolor{NavyBlue}{RGB}{0,86,125}}
+
+\def\OJlogo{\vspace{-4pt}$<$Society logo(s) and publication title will appear here.$>$}
+\def\seclogo{\vspace{10pt}$<$Society logo(s) and publication title will appear here.$>$}
+
+\def\authorrefmark#1{\ensuremath{^{\textbf{#1}}}}
+
+\begin{document}
+\receiveddate{XX Month, XXXX}
+\reviseddate{XX Month, XXXX}
+\accepteddate{XX Month, XXXX}
+\publisheddate{XX Month, XXXX}
+\currentdate{XX Month, XXXX}
+\doiinfo{XXXX.2022.1234567}
+
+\markboth{}{K. Namitha {et al.}: Advancing Autism Spectrum Disorder Diagnosis with Multimodal Data: A Survey}
+
+\title{Advancing Autism Spectrum Disorder Diagnosis with Multimodal Data: A Survey}
+
+\author{\uppercase{K. Namitha} \authorrefmark{1},
+\uppercase{S. Girish}\authorrefmark{1},
+\uppercase{M. P. Anuvind}\authorrefmark{1}, \uppercase{R. S. Harish Kumar}\authorrefmark{1},\\ \uppercase{Harishankar Binu Nair}\authorrefmark{1}, \uppercase{Dhanya Chandran}
+\authorrefmark{2}, and \uppercase{Sooraj K Babu}\authorrefmark{3}}
+\affil{Department of Computer Science and Engineering, Amrita School of Computing, Amrita Vishwa Vidyapeetham, Amritapuri, Kerala 690525, India}
+\affil{Department of Clinical Psychology, Amrita Institute of Medical Sciences, Kochi 682041, India}
+\affil{Games Engineering, Julius-Maximilians University, Würzburg 97074, Germany}
+
+\corresp{Corresponding author: K. Namitha (email: namithak@am.amrita.edu).}
+\authornote{}
+
+\begin{abstract}
+Autism Spectrum Disorder (ASD) is a multifaceted neurodevelopmental condition that is distinguished by a variety of behavioral and communicative challenges. Conventional diagnostic techniques, including clinical observations and standardized questionnaires, despite their prevalence, are hindered by drawbacks such as subjectivity, variability across practitioners, and prolonged assessment durations. This review provides an overview of ASD diagnosis using multimodal data sources while addressing the drawbacks of traditional approaches. We analyze key datasets pertinent to ASD research, in conjunction with diverse multimodal data sources, including wearable sensors, physiological monitoring devices, video cameras, neuroimaging methodologies, and clinical assessments. Single-modality learning algorithms, while successful in some cases, frequently fail to capture the complete range of ASD symptoms due to their narrow scope. This article examines the integration of multiple data modalities, reviewing advanced multimodal fusion algorithms intended to combine heterogeneous data, and addressing their advantages and limitations. We provide a concise summary of the current research trends emphasizing their critical research challenges.
+\end{abstract}
+
+\begin{keywords}
+Autism Spectrum Disorder, Data Fusion, Deep Learning, Diagnosis, Machine Learning, Multimodal Data, Survey.
+\end{keywords}
+%\IEEEspecialpapernotice{(Invited Paper)}
+
+\maketitle
+\section{Introduction}
+\label{sec:introduction}
+\PARstart{A}{utism} Spectrum Disorder (ASD) is a complex neurodevelopmental disease defined by a diverse array of stereotyped traits and deficits in behavior, communication, and cognition \cite{1}. The onset of ASD generally manifests in early childhood and profoundly impacts a child's cognitive, social, emotional, sensory, and motor development \cite{97,2,96,3}. ASD is recognized to impact multiple regions of the brain, affecting speech and social interaction\cite{98}\cite{3}. The condition also involves genetic factors such as gene interactions or polymorphisms\cite{4,5}, however, the precise reasons remain unclear.
+
+ASD exhibits traits like delayed motor development, repetitive behaviors, verbal and nonverbal communication problems \cite{99,95}, and interacting in complex ways. Various biological factors, including genetic, biochemical, and neuroendocrine influences, are known to interact with environmental factors in the development of ASD \cite{6}. It is primarily recognized as a neurodevelopmental condition, with diagnosis relying on a comprehensive analysis of detailed caregiver-reported history, behavioral observations, and objective evaluations using standardized psychological assessments. It is found out that the disorder is not detectable during pregnancy and believed to originate in the womb, persistent throughout life without any cure\cite{7}. Early identification of ASD is crucial for faster intervention as it is often seen that the brain adjusts quickly at an early age.
+\begin{figure*}[!tb]
+\subfloat[]{%
+    \includegraphics[width=0.5\textwidth]{namit1a.pdf}
+	}
+	\subfloat[]{%
+	\includegraphics[width=0.5\textwidth]{namit1b.pdf}
+	}
+\caption{(a) Number of papers published between 2015 to 2024 and (b) Distribution of academic publications by various publishers}
+\label{bar}
+\end{figure*}
+
+Globally, the occurrence of ASD has increased significantly, raising concerns for public health. ASD affects about 1 in 54 children compared to 1 in 150 in the 1990s in the United States \cite{8} according to the census from the Center for Disease Control and Prevention (CDC). This sharp rise indicates the disorder's increasing occurrence and diagnosis \cite{9}. In 2018 the U.S. was reported to have 168 per 10,000 children affected by ASD. 1 in 70 children globally, is impacted by ASD. Furthermore, males are more prone to ASD, with a diagnosis rate of 3.63\% among boys aged 3–17 years, in contrast to 1.25\% for girls \cite{10,11,12}. ASD cases seem to be rising in developed as well as developing areas\cite{13}. In India, studies indicate that the prevalence of ASD among children ranges between 0.15\% and 1\% \cite{dc1}. Additionally, the Rights of Persons with Disabilities (RPwD) Act, 2016, includes ASD among the 21 legally recognized disabilities and seeks to guarantee equal rights and opportunities for all individuals \cite{dc2}. The increasing rate may be related to enhanced awareness, improved diagnostic instruments, or earlier interventions \cite{14}, all of which have led to more diagnoses. Despite extensive research in improving the assessment of ASD, the cause remains unclear \cite{15,6}.
+
+Prior to the American Psychiatric Association's adoption of the Diagnostic and Statistical Manual of Mental Disorders, 5th Edition (DSM-5) in 2013, Asperger’s Syndrome \cite{16}, Rett Syndrome \cite{17}, Childhood Disintegrative Disorder (CDD) \cite{18,117}, Classic Autism \cite{19}, and Pervasive Developmental Disorder – Not Otherwise Specified (PDD-NOS) \cite{20} were the initial classifications of ASD. 
+\begin{figure*}
+	\centerline{\includegraphics[scale=0.93]{namit2.pdf}}
+	\caption{Overview of Autism Spectrum Disorder (ASD) diagnosis.}
+	\label{fig_2}
+\end{figure*}
+
+Repetitive behaviors, and restricted social interactions and nonverbal communications while exhibiting minimal effects on language or cognitive development are the main characteristics of Asperger's Syndrome\cite{16,100,102}. Rett Syndrome primarily affects women\cite{101} and is characterized by repetitive hand gestures with severe physical and cognitive deficits. Childhood Disintegrative Disorder\cite{117} is characterized by a significant deterioration in language, social, and motor abilities after at least the first two years of typical development. In contrast, classic autism or Kanner's syndrome affects the children's interaction and communication skills across a wide range of severity\cite{21}. Children exhibiting mild or partial symptoms are classified under Pervasive Developmental Disorder-Not Otherwise Specified (PDD-NOS) \cite{21}.
+
+The classification of autism underwent substantial revisions with the advent of DSM-5 \cite{14}. The former subcategories of ASD have been eliminated and consolidated into one category of ASD\cite{21}. ASD is subdivided into three severity levels by the DSM-5: Level 1 requires support; Level 2 requires substantial assistance; and Level 3 requires extensive support. This acknowledges that autism constitutes a spectrum of neurodevelopmental problems characterized by degrees of impairment and support requirements.
+
+Clinical diagnostic methods encompasses interviews\cite{33}, observations\cite{14}, standardized assessments\cite{34} and neuroimaging or genetic testing. The lack of sensitivity, specificity, and impartiality can result in inconsistent diagnosis and prolonged intervention times. Furthermore, information obtained through clinical interviews may often be discrepant between informants, who are often not aware of the symptoms that their child may be exhibiting, thus leading to errors in diagnosis.
+
+ASD diagnosis is challenging due to its complex and multifaceted symptoms \cite{prema}. Currently, most methods rely on single modality data with limited information and often fail to perform well on various datasets\cite{fus1}. The interest in using multimodal data sources and fusion techniques (MMDFT) for improving the detection and diagnosis of ASD symptoms has been increasing in recent years \cite{fus10}. To capture complex complementary features of the underlying disorder, MMDFT integrates data from several heterogeneous sources such as sensors \cite{116}, imaging modalities, and behavioural observations to learn various complex ASD symptoms, behaviors, and brain correlates. This article presents a review of recent works in ASD diagnosis which detects various symptoms using methods that include machine learning algorithms \cite{110,111,113,115}, computer vision techniques \cite{105,112}, and signal processing methods \cite{114fmri}. Fig. \ref{bar} illustrates the year and publisher-wise distribution of articles used in this review.
+\subsection{Motivation and Scope}
+This article provides an extensive analysis of employing multi-modal data sources and techniques for ASD diagnosis. We analyze the integration of data from video cameras, wearable sensors \cite{nam}, neuroimaging approaches, and clinical assessments to get a comprehensive knowledge of symptoms connected to ASD. Additionally, we examine the advantages and challenges faced while integrating the diverse data modalities, encompassing concerns regarding various fusion methods, and model interpretability. To enhance the precision and dependability of ASD diagnosis, we conclude by discussing the future research path and challenges. Fig. \ref{fig_2} presents the outline of this survey.
+
+The remainder of the paper is organized as follows. A summary of the diagnosis of autism spectrum disorder (ASD), standard diagnostic techniques, and related difficulties are provided in Section II. Section III provides a brief overview of the datasets utilized in research on ASD assessments. The different sources of multimodal data used to diagnose ASD are described in Section IV. Section V discusses the drawbacks of using single-modality learning algorithms to diagnose ASD. Section VI examines a variety of multimodal data fusion methods. In Section VII, the real-world challenges associated with data fusion techniques are discussed, and Section VIII concludes.
+\section{Overview of Autism Spectrum Disorder (ASD) Diagnosis}
+Children with ASD face diverse challenges that require a dimensional approach to evaluation. While significant focus is placed on areas such as atypical behavioral patterns \cite{22}, stereotypical movements, social interactions, and verbal and non-verbal communication, other critical ASD markers such as sensory and neural functioning, emotional regulation, gestures \cite{fus10_40}, facial expressions\cite{23, 24} and cognitive abilities also warrant attention. Despite this, these impairments are often assessed categorically, which may not provide a comprehensive evaluation of their complexity.
+% Children with autism face difficulties in social aptitude, behavior\cite{22}, verbal expression, and nonverbal communication. Children with developmental disabilities have reduced communicative gestures\cite{fus10_40} in comparison to Typically Developed(TD), resulting in difficulties expressing their ideas or thoughts through verbal communication, gestures, or facial expressions\cite{23, 24}.
+\subsection{Traditional Intervention and Diagnostic Methods}
+Traditional diagnostic approaches rely on clinical interviews combined with an in-depth evaluation of the child’s behavior and performance on various psychological assessments. These methods are primarily based on clinical judgment, supported by data gathered through these evaluations. However, given the significant inter-individual variability in ASD \cite{27}, there is a pressing need for more refined and objective evaluation methods to ensure greater accuracy and consistency in diagnosis. Interventions for ASD encompass rehabilitative training, pharmacological therapy, and psychosocial treatment. Rehabilitation training, including applied behavior analysis (ABA) \cite{aba}, sensory integration therapy \cite{sit,116}, communication intervention \cite{comm}, and TEACCH (Treatment and Education of Autistic and Related Communication Handicapped Children) \cite{25, 26}, is widely known for adapting to the symptoms of ASD and adjusting to life. 
+% Physicians engage with the children and parents, collecting medical history and conducting behavioural assessments that vary from those of typically developing children\cite{27}. Furthermore, physicians may ask children to engage in tasks while observing attention span, ocular movement, and facial expressions\cite{28}.
+
+Timely intervention is crucial for children with ASD\cite{29, 57}. Intervention programs encompass special education, behavioural therapy, fitness promotion, and rehabilitation\cite{30}, with the objective of enhancing communication, improving social interaction, and mitigating behavioural symptoms. Initiating timely intervention and therapy, particularly during infancy, is highly advantageous\cite{31}. In addition to therapy, specialized educational services are essential to the complex needs of ASD\cite{30}. Traditionally, the diagnosis of ASD has depended on DSM-5\cite{14} and ICD-10\cite{icd10}, which encompasses behavior observation, parental interviews, and assessments of visual, auditory, genetic, and neurological components. Other assessment tools such as Autism Diagnostic Interview-Revised (ADI-R)\cite{33}, Modified Checklist for Autism in Toddlers (M-CHAT) \cite{35}, Autism Diagnostic Observation Schedule-Second Edition (ADOS-2)\cite{32}, Childhood Autism Rating Scale (CARS)\cite{34}, and Indian Scale for Assessment of Autism (ISAA) \cite{dc3} are commonly employed.
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{p{3.1cm}p{1.2cm}p{1.2cm}p{1cm}} 
+    \noalign{\smallskip}\hline\noalign{\smallskip}
+    Dataset & Type & Availability & Ref. \\ 
+    \noalign{\smallskip}\hline\noalign{\smallskip}
+    EEG King Abdul Aziz Dataset & EEG & Private& \cite{48} \\
+    \hline\noalign{\smallskip}
+    ABIDE Dataset & MRI& Public&  \cite{38, 39} \\
+    \hline\noalign{\smallskip}
+    J. Han et al. Dataset& EEG and ET & Private&  \cite{fus1} \\
+    \hline\noalign{\smallskip}
+    Self-Stimulatory Behavior Dataset (SSBD) & Video& Public&  \cite{47} \\ 
+    \hline\noalign{\smallskip}
+    Expanded Stereotype Behavior Dataset (ESBD) & Video& Public& \cite{40} \\ 
+    \hline\noalign{\smallskip}
+    3D-AD Dataset & Video& Public&  \cite{41} \\ 
+    \hline\noalign{\smallskip}
+    Saliency4ASD Dataset & ET & Public&  \cite{43} \\ 
+    \hline\noalign{\smallskip}
+    Ammar I. Shihab et al. Dataset & ET & Private&  \cite{44} \\ 
+    \hline\noalign{\smallskip}
+    3D skeleton-based gait Dataset & Pose& Private&  \cite{45} \\ 
+    \hline\noalign{\smallskip}
+    A. Zunino et al. Dataset& Video& Private&  \cite{42} \\ 
+    \hline\noalign{\smallskip}
+    Gaze Dataset & ET & Private&  \cite{46} \\ 
+\hline\noalign{\smallskip}
+ DREAM Dataset& Video& Public&\cite{131} \\
+ \hline\noalign{\smallskip}
+ Gait and Full Body Movement Dataset& Video& Public&\cite{132} \\
+ \hline\noalign{\smallskip}
+ Bosphorous Dataset& FER & Public&\cite{133} \\
+ \hline\noalign{\smallskip}
+ DISFA Dataset& FER & Public&\cite{134} \\
+ \hline\noalign{\smallskip}
+ SEMAINE Dataset& FER & Public&\cite{135} \\
+ \hline\noalign{\smallskip}
+ BP4D Dataset& FER& Public&\cite{136}\\
+ \hline\noalign{\smallskip}
+ NDAR Dataset& MRI& Public&\cite{149}\\
+ \hline\noalign{\smallskip}
+ Active Dataset& Video& Private&\cite{activis}\\
+ \hline\noalign{\smallskip}
+ MSRDailyActivity3D dataset& Pose& Public&\cite{pose_d}\\
+ \hline\noalign{\smallskip}
+ PRECIS HAR dataset& Pose& Public&\cite{pose_d2}\\
+ \hline\noalign{\smallskip}
+ KDEF& FER & Public&\cite{KDEF}\\
+ \hline\noalign{\smallskip}
+ FER2013& FER & Public&\cite{fer2013}\\
+ \noalign{\smallskip}\hline
+    \end{tabular}
+\caption{Summary of key datasets for ASD diagnosis}
+\label{data_tab}
+\end{table}
+\begin{figure*}
+	\centerline{\includegraphics[scale=0.63]{namit3.pdf}}
+	\caption{Multimodal data sources for Autism Spectrum Disorder (ASD) diagnosis.}
+	\label{fig_3}
+\end{figure*}
+\begin{table*}
+	\centering
+	\begin{tabular}{p{1.4cm} p{2.5cm} p{6.0cm} p{3.5cm} p{1.6cm}}
+		\hline\noalign{\smallskip}
+		Modality & Datasets & Preprocessing & Algorithms & References \\
+		\noalign{\smallskip}\hline\noalign{\smallskip}
+		Wearable Sensors & Private Datasets &FFT, Denoising. &KNN, SVM, Logistic Regression, MLP, CNN, LSTM.  &\cite{129} \\
+		& & & & \\
+		\hline\noalign{\smallskip}
+		HRV & Private Datasets & Smoothening, Frequency matching, DWT, RR interval time series preprocessing, stepwise filtering. &SVM, DT, KNN.&\cite{51,56,125,130,119,52,53} \\
+		& & & & \\
+		\hline\noalign{\smallskip}
+		EEG & EEG King Abdul Aziz Dataset\cite{48} & EEGLAB, Segmentation, Down-Sampling, Elliptic Bandpass filter, HOS, LSDA, Channel re-referencing, FFT, ShuffleNet, SqueezeNet, MobileNetV2,ICA,PCA,CWT,DWT, I-FAST. & KNN, ANN, PNN, SVM, RNN, CNN, Random Forest, MLP, Logistic regression, DNN.  &\cite{78,81,82,83,84,85,86,87,88,89,90,91,92} \\
+		& & & & \\
+		\hline\noalign{\smallskip}
+		MRI &ABIDE-I\cite{38}, ABIDE-II\cite{39}, NDAR\cite{149} &Spatial Smoothing, Temporal Filtering, Realignment, Slice Time Correction, Normalization, C-PAC pipeline. &SVM, CNN, SLP, MLP, AE. & \cite{114fmri,37,121, 123, 79} \\
+		& & & & \\
+		\hline\noalign{\smallskip}
+		Facial Expression Recognition &Bosphorous dataset\cite{133}, DISFA\cite{134}, SEMAINE\cite{135}, BP4D\cite{136}, KDEF\cite{KDEF}, FER2013\cite{fer2013} &Video Sampling, Segmentation, HOG.   &SVM, SVR, CNN, CLM, RNN.  &\cite{62,63, x12} \\
+		& & & & \\
+		\hline\noalign{\smallskip}
+		Eye Tracking &Saliency4ASD\cite{43}, Shihab et al.\cite{44}, Yaneva et al.\cite{46} &ResNet-18, GoogleNet, Laplacian Filters. & XGBoost, SVM, ANN, FFNN, STAR-FC. &\cite{72,73, 150, 151, 152, 153, 154} \\
+		& & & & \\
+		\hline\noalign{\smallskip}
+		Repetitive Behaviors & Dream dataset\cite{131}, Gait and Full Body Movement Dataset\cite{132}, SSBD\cite{47}, ESBD\cite{40}, 3D-AD\cite{41} & View-invariant transformation, HOG, HOF, SIFT, SURF, EfficientNet, Segmentation, RAFT, YOLOv5, DeepSORT. & SVR Regression, K-mean clustering, MS-TCN, 3D-CNN. &\cite{131,132,59,64,70, x16} \\
+		& & & & \\
+            \hline\noalign{\smallskip}
+            Pose Estimation&Abdulrahman et al. \cite{132}, MSRDailyActivity3D dataset\cite{pose_d}, PRECIS HAR dataset\cite{pose_d2}&Background Subtraction, Cropping, Multi-Object Tracking, max-pooling, localization, OpenPose, Lucas-Kanade optical flow, Dense optical flow, Denoising.& DNN, DT, SVM, RF, TCDN + SVM, CNN-LSTM.& \cite{61,60,40}\\
+            & & & & \\
+		\hline\noalign{\smallskip}
+	\end{tabular}
+ \caption{Summary of various modalities for ASD diagnosis}
+	\label{tab3} 
+\end{table*}
+\subsection{Challenges in Traditional Methods}
+The conventional method for ASD diagnosis has numerous shortcomings. A significant problem is the lack of understanding of the cause of ASD\cite{fus1}, leading to a substantial dependence on observable behaviors which varies among ASD frequently resulting in inconsistent diagnoses\cite{fus1}. The method is time and labor-intensive, and requires a child's cooperation, rendering it challenging for infants or those with severe symptoms\cite{2}. A deficiency of expert doctors intensifies delays and prolongs intervention\cite{103}. Another concern is the reliance on inadequate or inaccurate family reports and unawareness of ASD symptoms. This increases misdiagnosis or delays in the diagnosis\cite{37}. The current diagnostic methods do not capture the broad range of ASD symptoms and severities in which the traditional method may overlook mild or atypical cases \cite{104}. Furthermore, the assessment tools used in conventional methods are suitable for younger children and may not cover the nature of difficulties reported by adolescents or adults with ASD.
+\section{Autism Spectrum Disorder Datasets}
+The availability and quality of the datasets are crucial for developing AI-based systems for ASD diagnosis\cite{107,108,109}. Various datasets have been developed and used in research to investigate neurological, behavioural, and other traits that differentiate ASD and TD people. An outline of the major datasets that have been cited in the literature is discussed in this section, highlighting their contributions to the field and their unique features as shown in Table \ref{data_tab}.
+
+The most commonly used datasets in diagnosing ASD are discussed in this section. Adriana Di Martino et al. \cite{38, 39} created the Autism Brain Imaging Data Exchange (ABIDE) dataset, which is segmented into two subsets: ABIDE-I \cite{38} and ABIDE-II \cite{39}. The ABIDE-I dataset, which consists of 1112 data sets (539 individuals with ASD and 573 healthy controls, aged 7-64), has been anonymized in accordance with HIPAA and FCP/INDI procedures \cite{38}. These datasets include structural MRI, resting-state fMRI, and phenotypic data from 17 global locations. Data from 19 sites totaling 1114 data sets (with 521 ASD individuals and 593 healthy people between the ages of 5 and 64) make up ABIDE-II \cite{39}. F. Negin et al. \cite{40} created the Expanded Stereotype Behavior Dataset (ESBD) using YouTube videos of 108 youngsters susceptible to ASD (76 males, 32 females) exhibiting four stereotypical behaviors: spinning, arm flapping, hand gestures, and headbanging. The 141 movies are carefully chosen from comprehensive recordings of daily life produced by parents. Rihawi et al. \cite{41} developed the 3D-AD dataset with a Kinect-v2 camera, which records depth maps and skeletal joint characteristics at a frequency of 33 frames per second from individuals with ASD doing 10 movements, such as toe walking, hand stimming, and headbanging. 
+
+Zunino et al. \cite{42} developed a video dataset utilizing a Vicon VUE camera (1280 x 720, 100 frames/sec) to assess the behaviors of children with ASD, including placing, picking, and passing objects. M. Jaffer et al. created an EEG dataset from children aged 10–11 at King Abdulaziz University Hospital, including a normal group (4 boys) and an autistic group (8 children). EEG data were captured in a relaxed state with a g.tec EEG cap, USB amplifiers, and BCI2000 software \cite{48}. Duan et al. \cite{43} produced the 'Saliency4ASD' dataset, which tracked 14 ASD and 14 TD children (ages 5-12) while they viewed 300 photos. A gaze dataset comparing the face-scanning tendencies of TD and ASD persons (ages 4–60) using analog cameras was made available by Shihab et al. \cite{44}. Al-Jubouri et al. \cite{45} published a private 3D skeleton-based gait dataset using Kinect v2 for 50 children with ASD and TD. Yaneva et al. \cite{46} produced a gaze dataset that included 30 persons (15 with ASD) doing visual tasks in order to classify ASD using logistic regression. Rajagopalan et al. \cite{47} created the Self-Stimulatory Behaviour Dataset (SSBD) from 75 public YouTube videos showing stimming actions, including arm flapping, headbanging, and spinning. Other such datasets used for ASD diagnosis are listed in Table \ref{data_tab}.
+\section{Multimodal Data Sources}
+Early detection and diagnosis of ASD are critical due to its clinical and diverse nature of conditions \cite{49}. ASD is characterized by impairments in speech \cite{10}, social interactions \cite{6}, and repetitive activities \cite{14}. Numerous methods have been developed for precise diagnoses such as video cameras\cite{59,73,151,152,72,153,70,x16,150,40,154}, wearable sensors\cite{50,51,129,118}, speech analysis, interview-based approaches\cite{33,icd10,14}, and neuroimaging modalities\cite{37,75,76,114fmri,77,78,81,82,83,84,85,86,87,88,89,91,92}. A multi-level diagram of various modalities employed for the early diagnosis of ASD is illustrated in Fig. \ref{fig_3}. Different techniques are used for ASD diagnosis such as analyzing data from wearable sensors, biomarkers like Electroencephalogram (EEG) signals and heart rate variability (HRV), video-camera-based data like repetitive behavior, facial expressions, abnormal gait, and gaze patterns, neuroimaging data like Magnetic Resonance Imaging (MRI) and functional Magnetic Resonance Imaging (fMRI), and interview-based textual data\cite{14,33,icd10}. Subsequently, each category is further categorized according to the data sources as shown in Table \ref{tab3}.
+\subsection{Wearable Sensors}
+Wearable technology \cite{50} has revolutionized the diagnosis of ASD known for its real-time fast transmission of data by small IoT devices attached to the body. These devices monitor the position of a person, movement, heart rate, EEG signal, providing information on stereotypical traits exhibited by ASD. Recent studies concentrate on incorporating wearable sensors into therapies for ASD using Artificial Intelligence (AI)\cite{118}, employing customized Heart Rate Variability (HRV) sensors, classification algorithms, and individualized applications \cite{51}. These technologies monitor social interaction, emotional regulation, cognitive development, and sensory management for diagnosing ASD. A platform utilizing wearable sensors to identify gesture movements in children with ASD through machine learning algorithms is presented in \cite{129}. A solitary Hexiwear sensor module, incorporating both an accelerometer and a gyroscope, was affixed to the writing position of either the right or left hand for data acquisition.
+%[see Fig. \ref{fig_3}(a)]. 
+\subsubsection{Heart Rate Variability (HRV)}
+Heart rate variability (HRV) \cite{125} has emerged as a possible biomarker for ASD\cite{55,119}, specifically concerning social challenges. Frasch et al. \cite{52} investigated the correlation between heart rate variability (HRV) and ASD utilizing both linear and nonlinear HRV measurements. A study \cite{53} comparing HR, Standard Deviation of Normal-to-Normal Intervals (SDNN), and Coefficient of Variation revealed that SDNN is elevated in children with ASD relative to TD children. Chen et al. \cite{fus9} created an intelligent evaluation system that integrates HRV, EEG, eye tracking, and breath sensing. A meta-analysis \cite{56} determined that persons with ASD exhibit reduced baseline heart rate variability (HRV) compared to those without ASD. Electrocardiogram (ECG) data is employed to differentiate between 'like' and 'dislike' valence states in both control groups and children with ASD \cite{130}. Time-domain features specific to valence were derived using the normalized ECG signal and HRV signals extracted from the ECG data.
+%[see Fig. \ref{fig_3}(b)].
+\subsection{Video Cameras}
+One of the common stereotyped behaviors observed in individuals with ASD includes repetitive actions such as flapping arms, head shaking, and spinning \cite{40}. These behaviors are critical indicators used in clinical settings to diagnose ASD. Typically, physicians monitor these behaviors during interactions between the child and their environment, such as during play with parents or toys \cite{57, 58}. The conventional approach relies heavily on parent-reported observations and video recordings analyzed by clinicians \cite{27}, which introduces a degree of subjectivity that can impact the accuracy and consistency of the diagnosis.
+\subsubsection{Activity Comprehension}
+Vision-based approaches have emerged as promising tools for diagnosing ASD by capturing and analyzing behavioural patterns associated with the condition. As a behavioural marker, the reduction of visible gestures in social activities is marked as an early symptom by the CDC\cite{fus10_42}, other such markers are fewer responses to joint attention in the early stage of development\cite{fus10_43} and fewer initiation of joint attention with others\cite{fus10_44}. Pengo Wei et al. \cite{59} analyzed various models and produced a lightweight activity recognition model using I3D convnet feature extractor and Multi-Stage Temporal Convolutional Network classifier trained on an enhanced dataset from SSBD, they removed the background by detecting the target child in the frame for denoising. Shuaibing Liang et al. \cite{70} proposed a novel unsupervised method using a Temporal Coherency Deep Network for feature extraction and an SVM for classifier, k-means, and LRP is used to understand and explain the effectiveness of the network. The unsupervised nature of the model was due to the unavailability of annotated datasets. Abid Ali et al. \cite{64} presented a computer-assisted solution for ASD using an I3D-based model trained on a novel Activis dataset which underwent preprocessing like YOLOv5 detection and DeepSORT tracking. Sindhoor Preetham et al. \cite{x16} proposed a meltdown detection model in ASD children using an RCNN model run in a mobile GPU environment for real-time processing. Other works have used skeletal data for training which yielded higher performance. In a recent work by Yunkai Zhang et al. \cite{61}, they proposed a skeletal data-based system extracted using OpenPose and learned by an LSTM network. Their system followed a 3-step pipeline with pose extraction, denoising, multi-person extraction, and classification. F. Negin et al. \cite{40} proposed a comprehensive dataset called ESBD, they have developed several action recognition-based models by extracting their discriminative information. A HOF descriptor combined with BOVW architecture outperformed other models in their experiment. In their experiment, CNN combined with LSTM also achieved competitive performance, but to implement such a system in practical environments certified expertise is needed. Peter Washington et al. \cite{60} developed a computer vision-based classifier using a CNN+LSTM network to detect headbanging in SSBD dataset.
+\subsubsection{Facial Expression Recognition (FER)}
+Children with ASD often exhibit distinct facial stereotypical traits \cite{varsha,mod} like reduced expressiveness or atypical emotional responses\cite{fus10_41} that can be assessed to diagnose ASD. Jingjing Liu et al. \cite{x12} developed a multimodal framework with hand gestures, head pose, gaze estimation, and movement detection with each modality learned by parallel models. This hierarchical framework studies the Joint Attention of the children. Manar D. Samad et al. \cite{63} presented a novel computer vision-based method to study facial responses using a facial action coding system to classify spontaneous facial responses. The results showed significant aversion to eye-gaze from faces, poor coordination between eye-gaze and hand movement, and deficit in motor skills. Marco Del Coco et al. \cite{62} developed a facial feature analysis model using HOG for face detection, a Conditional Local Neural Field for facial landmark detection, and multi-face tracking to identify and classify facial expressions.
+\subsubsection{Gaze-Tracking Pattern Analysis}
+Eye tracking (ET) methods for ASD diagnoses often rely on the symptom that children with ASD have reduced gaze duration towards faces and social interactions in comparison to normally developing (TD) children\cite{71,supritha,behave}. Shuo Wang et al.\cite{150} reported experimental findings indicating that individuals with ASD exhibited a heightened central fixation bias, increased attention to low-level saliency, diminished attention to semantic-level saliency, and reduced focus on faces and objects of another's gaze in comparison to typically developing individuals. Related works on ET for ASD diagnosis include Ibrahim Abdulrab Ahmed et al. \cite{73}, who developed an FFNN and ANN classifier with local binary pattern and grey level occurrence matrix algorithms feature extractor, GoogleNet and ResNet-18 classifier, GoogleNet + SVM and ResNet-18 + SVM classifier, where the first model achieved better performance. Pradeep Raj Krishnappa Babu et al. \cite{151} developed a Gaze-sensitive Virtual-Reality based social-skill platform comprised of virtual-reality-based social communication tasks analyzed by Classification tree, Regression tree, Bayesian network, and SVM classifiers. Shi Chen et al. \cite{152} developed a novel computer vision-based method using ResNet-50 and LSTM network trained on photo-taking data and eye-fixation data. Shafin Rahman et al\cite{72} developed a novel saliency-based XGBoost classifier for eye-tracking data. Ming Jiang et al. \cite{153} proposed a SALICON network-based feature extractor with an SVM classifier learned from discriminative features of fixation maps. Yudong Tao et al. \cite{154} propose a novel SP-ASDNet architecture comprised of CNN-LSTM networks, another GAN-based model called SalGAN was developed in the experiment.
+\subsection{Neuroimaging Techniques}
+Various Neuroimaging methods \cite{37} such as functional magnetic resonance imaging (fMRI) \cite{75,76,114fmri}, magnetoencephalography (MEG)\cite{77}, and electroencephalogram (EEG)\cite{78} have been employed to investigate the specific features of brain structure and function related to ASD. Khodatars et al. \cite{37} conducted a review on deep learning for neuroimaging-based diagnosis and rehabilitation of ASD. Exploring various neuroimaging techniques and datasets, they discussed the potential of deep learning models such as CNN, RNN, and autoencoder in analyzing structural and functional connectivity of the brain data for ASD diagnosis and intervention. The review emphasizes the importance of advanced computational techniques in improving our understanding and management of ASD through neuroimaging analysis.
+\subsubsection{MRI and fMRI}
+Machine learning methodologies utilizing brain imaging data, including Magnetic Resonance Imaging (MRI) and functional Magnetic Resonance Imaging (fMRI), have been extensively employed for the diagnosis of neurological disorders such as Alzheimer's, Attention deficit hyperactivity disorder (ADHD), Mild Cognitive Impairment (MCI), and Autism\cite{121, 123}. T. Eslami et al.\cite{79} developed ASD-DiagNet, a framework for classifying ASD utilizing fMRI data. fMRI is a neuroimaging modality employed to investigate cerebral activity, while resting state fMRI (rs-fMRI) \cite{120} is frequently utilized for the analysis of neurological diseases. Their study utilized the ABIDE I dataset, with ASD-DiagNet being applied for feature extraction. It identifies features from the most correlated and anti-correlated brain connections, utilizing an autoencoder to identify lower-dimensional patterns. Sewani and Kashef et al. \cite{80} employed a deep learning classifier with autoencoders to enhance the diagnosis of ASD. This work integrated the autoencoder-based dimensionality reduction method with multiple machine learning and deep learning models, achieving higher classification accuracy utilizing fMRI data from the ABIDE dataset. This strategy enhanced the performance compared to the conventional models, illustrating the capability of deep learning models in augmenting the efficiency and precision of ASD diagnosis.
+\subsubsection{Electroencephalography (EEG)}
+Automated analysis of electroencephalography (EEG)\cite{81}, a method that captures electrical activity in the brain, can improve and accelerate diagnostic precision. Electroencephalography (EEG) is a widely used modality to measure neural activity and diagnose disorders like epilepsy, ASD, and Alzheimer's disease. Studies like J. Han et al. \cite{fus1} have shown that ASD patients exhibit abnormal neural oscillations and brain functional connectivity, with EEG features such as neural oscillation rhythm and nonlinear information dynamics used to differentiate ASD from TD children. Research has indicated the efficacy of EEG in diagnosing ASD \cite{82,83,84,85,86}. Ibrahim et al.\cite{81} presented various techniques for obtaining EEG characteristics and analyzing them to facilitate the diagnosis of ASD and epilepsy. A hybrid lightweight deep feature generator for identifying ASD utilizing EEG signals is presented in \cite{87}. Bosl et al.\cite{88} proposed a data-driven methodology employing nonlinear characteristics to forecast the clinical diagnostic outcome of ASD in infants. Techniques and methods for diagnosing ASD through EEG signals are reviewed in \cite{89,90,91}. G. Bouallegue et al. \cite{92} introduced a dynamic filtering approach combining Finite Impulse Response (FIR) and Infinite Impulse Response (IIR) filters with Recurrent Neural Networks using Gated-Recurrent Unit (RNN-GRU) to preprocess EEG sub-bands for ASD diagnosis. Feature extraction methods such as Independent Component Analysis (ICA), Principal Component Analysis (PCA), and Common Spatial Pattern (CSP), along with classifiers such as Support Vector Machines (SVM), K-Nearest Neighbors (KNN), K-means, and Convolutional Neural Networks (CNN), were applied to EEG data from the King Abdulaziz University (KAU) lab \cite{48}. Among these, ICA + CNN achieved the highest accuracy (99.5\%), outperforming other models by a significant margin.
+\subsection{Clinical Assessments}
+Behavioral and clinical assessments are the most widely used methods for diagnosing ASD. These assessments provide a comprehensive evaluation of a child's social, communication, and adaptive skills, using various methods like interviews, direct observations, rating scales, and reports. Expert clinicians use these methods to systematically evaluate a child's behavior and development. The following subsections detail the key tools used in these assessments.
+\subsubsection{Interviews}
+Traditional diagnosis of ASD often includes Interviews outlined by DSM-5 and ICD-10/11\cite{14,icd10}, which define the known symptoms of ASD patients such as social deficits and repetitive behaviors. These assessments provide a standardized consistent approach to the diagnosis. Other tools such as ADI-R and Social Communication Questionnaire (SCQ) are also used to gather detailed insights on the patient\cite{33,scq}.
+\subsubsection{Observations}
+Direct observation allows clinicians to directly assess a child's behaviors in a natural non-invasive way with interactive activities. ADOS-2 is one of the most commonly used tools for observations\cite{32}. This method uses structured activities and social scenarios to assess communication, social interaction, and repetitive behaviours, providing a standardized method to observe autistic symptoms. It is flexible, as it can be adapted for different age groups and language abilities with tailored evaluations. While tools like TEACCH\cite{25,26}, and ESDM\cite{137} also provide valuable insights, ADOS-2 still remains the most commonly used tool in the observational diagnosis of ASD.
+\subsubsection{Rating Scales}
+Various rating scales have been developed to understand the severity of the ASD spectrum. CARS\cite{138} is a particularly effective tool, as it evaluates the child across multiple domains, such as social interaction, communication, and sensory sensitivities, providing a comprehensive picture of symptom severity. Other tools like ABC\cite{139} and ISAA\cite{140} offer additional frameworks for assessing autistic traits. The ELMS\cite{141} and TABC\cite{142} focus on developmental delays. Scales like GARS\cite{143} and SRS\cite{144} assess social impairments. The Developmental Behaviour Checklist (DBC)\cite{145} targets emotional and behavioural challenges.
+\subsubsection{Reports}
+Reports based on questionnaires provide early screening data. M-CHAT\cite{35} is used for early detection of autism in toddlers. INDT-ASD\cite{146} is a similar screening tool, particularly for resource-limited settings. VABS \cite{147} assesses daily living and social skills. ASQ-3\cite{148, 149} tracks developmental milestones.
+\begin{figure*}
+	\centerline{\includegraphics[scale=0.4]{namit4.pdf}}
+	\caption{A general multimodal data fusion framework for diagnosing ASD with three primary steps: data collection, training, and classification.}
+	\label{fig_1}
+\end{figure*}
+\section{Limitations of Single-Modality Learning Algorithms}
+The use of single-modality learning algorithms in the diagnosis of Autism Spectrum Disorder presents several significant limitations due to the inherent complexity and heterogeneity of the disorder. ASD manifests across a broad spectrum, with individuals exhibiting a wide range of symptoms and severities. As a result, patients may present with some traits more prominently while other traits may be less apparent or entirely absent. This variability leads to substantial challenges when using single-modality models that focus on a single aspect of the disorder.
+
+For example, if a patient demonstrates proficiency in speech but has marked deficiencies in social interaction, a speech analysis model may struggle to accurately diagnose ASD. The reliance on a single modality increases the likelihood of misdiagnosis because it fails to capture the full spectrum of symptoms and behaviors associated with ASD. Moreover, most existing studies rely on analyzing single modality data, such as Electroencephalography (EEG) or activity comprehension, which are insightful but limited in scope. ASD is a complex neurodevelopmental disorder that affects both neurophysiological and behavioural domains. EEG and activity comprehension represent two distinct modalities that provide internal neurophysiological and external behavioural perspectives, respectively. However, each modality captures only a fragment of the broader picture, making it difficult to accurately and comprehensively diagnose ASD using single modality models alone\cite{fus1}.
+
+The difficulty is further increased due to the data heterogeneity inherent in neurophysiological and behavioural modalities. Single modality models struggle to explore the hidden correlations and complementary information between these diverse modalities. This limitation significantly deteriorates the ability to fully understand the intricate neurobiological traits of ASD and reduces the efficiency of these diagnostic approaches.
+
+To address these limitations, there has been a significant increase of interest in integrating multiple modalities and stimulant-type data, such as Electroencephalography (EEG), Magnetic Resonance Imaging (MRI), functional MRI (fMRI), magnetoencephalography (MEG), Diffusion Tensor Imaging (DTI), Eye Tracking (ET), activity comprehension, pose estimation, speech analysis, facial expression analysis. By combining these diverse data sources, Artificial Intelligence models can gain a more comprehensive understanding of the autistic brain to effectively diagnose ASD. These multi-model data fusion techniques allow for the exploration of relationships between different behavioural and neurophysiological measures, providing a richer, more nuanced characterization of ASD and its underlying mechanisms.
+% Single-modality learning algorithms rely on data from a single source (e.g., only images, audio, or sensor data), its significant limitation lies in the inherent complexity and heterogeneity of the disorder. ASD symptoms exhibit a wide range of symptoms and severities, with certain traits appearing more prominently in specific individuals, while others may be less apparent. This diversity presents challenges for the single-modality models that focus on a singular aspect of the disorder, as they may overlook key features. For example, a speech-based model may inaccurately diagnose a patient exhibiting proficient verbal abilities yet deficient social interaction, as it does not encompass the complete spectrum of ASD symptoms. Likewise, employing single-modality data such as EEG or body action recognition yields only fragmented insights into the neurophysiological or behavioural dimensions of ASD, hence constraining diagnostic precision. Furthermore, single-modality models encounter difficulties in identifying correlations between neurophysiological and behavioural data, hence diminishing their efficiency. To address these challenges, researches are done by integrating multiple modalities—such as EEG, MRI, fMRI, eye tracking, speech analysis, and social interaction monitoring—providing a broader comprehension of ASD by combining diverse data sources and encompassing a wider array of symptoms.
+\section{Multimodal Data Fusion Techniques for ASD Diagnostic Assessment}
+The complexity of ASD diagnosis requires more comprehensive approach than single-modality models can provide. Multimodal data fusion techniques \cite{fus1,fus2,fus3,fus4,fus5,fus6,fus7,fus8,fus9,fus10,fus11,fus12} offers critical improvements in diagnostic performance by integrating complementary information across different modalities, reducing the risk of misdiagnosis. By combining data from neuroimaging, behavioural analysis, and standardized autism assessment instruments, these techniques provide a more comprehensive understanding of ASD, which is essential given its wide-ranging and variable symptomatic traits. This section examines the methodologies and models utilized in multimodal data fusion for ASD diagnosis, emphasizing their advantages in enhancing diagnostic accuracy, alongside the limitations and challenges faced in this field. Fig. \ref{fig_1} illustrates a general multimodal data fusion framework for ASD diagnosis. We analyze existing studies to explore the benefits of these strategies and propose prospective future research directions in this domain.
+% \begin{figure}
+% 	\centerline{\includegraphics[scale=0.4]{namit5.pdf}}
+% 	\caption{A resting state EEG and ET fusion model by Junxia Han et al. (Source: \cite{fus1})}
+% 	\label{fus1}
+% \end{figure}
+% \begin{figure*}
+% 	\centerline{\includegraphics[scale=0.5]{namit6.pdf}}
+% 	\caption{A hybrid fusion-based model presented by Smith Khare et al. (Source: \cite{fus4})}
+% 	\label{fus4_2}
+% \end{figure*}
+% \begin{figure}
+% 	\centerline{\includegraphics[scale=0.28]{namit7.pdf}}
+% 	\caption{A general fusion model presented by Smith Khare et al. (Source: \cite{fus4})}
+% 	\label{fus4_1}
+% \end{figure}
+
+\subsection{Fusion Algorithms}
+Multimodal data fusion significantly enhances the accuracy and reliability of ASD diagnosis by integrating complementary data from multiple modalities. Junxia Han et al.\cite{fus1} proposed a multimodal diagnosis framework that simultaneously learns from both the internal neurophysiological and external behavioural modality data. They have employed a stacked denoising autoencoder (SDAE) model with 3 main stages. In the first stage, relevant features are extracted from EEG in neurophysiological data and Eye tracking(ET) information for behavioural data. In the second stage, EEG and ET features are learned by separate SDAEs; and in the third stage, a final SDAE extracts correlational context from the learned features and produces the final diagnosis. Quihong Wei et al.\cite{fus2} proposed a novel method for differentiating between similar disorders such as autism spectrum disorder (ASD), developmental language disorder (DLD), and global developmental delay (GDD) by fusing data from information such as language and cognitive abilities. Their novel work was dedicated to distinguishing between similarly confused neurodevelopmental disorders rather than classifying between ASD and TD, which is commonly done. Other novel contributions from this work include utilizing easy-to-obtain clinical instruments such as Modified Checklist for Autism in Toddlers (M-CHAT), Autism Behavior Checklist (ABC), Gesell Developmental Scale (GDS), and Early Language Milestone Scale (ELMS) in the experiment instead of the common differentiating behavioural markers. Various models, such as SVM, Linear Regression, Decision tree, XGBoost, were studied, and a version of the simplified XGBoost model performed best due to its simplicity. Limitations in this work include: 1) Only commonly available assessment instruments were used in the experiment; 2) The training data was from the same center, diverse data can deteriorate the model’s accuracy; and 3) This work simplified the complex model for better understanding by sacrificing the performance.
+
+Jewoong Moon et al.\cite{fus3} developed a novel predictive model in a virtual reality-based learning environment from cognitive training through immersive 3D simulation tasks. This work is unique in terms of focusing their work on learning the representational flexibility in autistic adolescents by a multimodal data fusion on a decision-level fusion approach by integrating behavioural cues, physiological responses, and direct interaction logs through both audio and screening channels in the recorded dataset. Smith K. Khare et al.\cite{fus4} described a systematic review of prominent articles used in ASD diagnosis and highlighted that data fusion has improved system performance and the need for further multimodal datasets. This review encourages the fusion of physiological signals, such as EEG, ECG, photoplethysmography (PPG) and electromyogram (EMG) to enhance detection accuracy and capture a more comprehensive picture of physiological changes. Recommended developing explainable AI models to provide insights into the decision-making process and build trust among clinicians and stakeholders. 
+%A general fusion-based analysis model for children's mental disorder assessment is shown in Fig. \ref{fus4_1}, and a hybrid fusion model is shown in Fig. \ref{fus4_2}.
+
+Varun Ganjigunte Prakash et al.\cite{fus5} presented multiple frameworks such as an activity comprehension model, a face expression recognition model, and a joint attention detection model with head position estimation and hand pointing analysis. They have employed spatio-temporal transformers for activity comprehension, comprised of 3 steps: 1) The data is passed through YOLOv5 for annotating. 2) The annotated data is passed through an R-CNN-based child detection model for separating the children from the caregivers. 3) The annotated data is finally sent to the activity prediction model, which is a spatio-temporal transformer trained on a collected dataset. A Resnet34 model \cite{resnet}was trained on various datasets such as kinetics, moments in time, HMDB, and the collected dataset for facial expression recognition\cite{kin,mit,hmdb}. For the joint attention detection model, they have implemented a head pose estimation model with YOLOv3 for object detection, an R-CNN with Resnet50 backbone for child detection, and a hand pointing analysis model with faster R-CNN and Resnet50\cite{resnet}.
+\begin{table*}[!tb]
+\centering
+\begin{tabular}{p{0.6cm}p{0.6cm}p{0.2cm}p{0.4cm}p{2.0cm}p{2.8cm}p{3.8cm}p{3.8cm}}
+\hline\noalign{\smallskip}
+\textbf{Paper} & \textbf{Year} & \multicolumn{2}{c}{\textbf{Paper Type}} & \multicolumn{2}{c}{\textbf{Methodology}} & \multicolumn{1}{c}{\textbf{Advantages}} & \multicolumn{1}{c}{\textbf{Limitations}} \\
+\cmidrule(lr){3-6}
+ & & \multicolumn{1}{c}{\textbf{C}} & \multicolumn{1}{c}{\textbf{J}} & \multicolumn{1}{c}{\textbf{Modalities}} & \multicolumn{1}{c}{\textbf{Model}} & & \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+\cite{fus1} & 2022 & \multicolumn{1}{c} - & \multicolumn{1}{c} \checkmark & EEG, ET & SDAE & Learns complementary information between modalities, enhanced identification performance, data-driven automatic learning & Scarcity of data and high computation cost \\
+\hline\noalign{\smallskip}
+\cite{fus2} & 2023 & \multicolumn{1}{c} - & \multicolumn{1}{c} \checkmark & M-CHAT, ABC, GDS, ELMS & XGBoost- Two Stage decision model & Uses easy-to-acquire instruments, better clinical interpretability.  & Limited assessment instruments, nondiverse source of participants, small sample size  \\
+\hline\noalign{\smallskip}
+\cite{fus3} & 2024 & \multicolumn{1}{c} - & \multicolumn{1}{c} \checkmark & Audio, video, interactions, behaviours & VR based system + RF, DT, SVM,NB & Ethical consideration and rigorous consent process & Not a randomized controlled trial, limited range of data sources \\
+\hline\noalign{\smallskip}
+\cite{fus4} & 2023 & \multicolumn{1}{c} - & \multicolumn{1}{c} \checkmark & - & Review & Improved system performance & Less interpretability and unreliable \\
+\hline\noalign{\smallskip}
+\cite{fus5} & 2023 & \multicolumn{1}{c} - & \multicolumn{1}{c} \checkmark & AC\textsuperscript{a}, FER, JA\textsuperscript{b}, head-pose, hand movement & R-CNN, ResNet50, ResNet34, spatio-temporal transformer, YOLOv3/5 & Enhanced clinician capacity, personalized treatment & Limited scope of activities and needs larger clinical trials \\
+\hline\noalign{\smallskip}
+\cite{fus6} & 2020 & \multicolumn{1}{c} - & \multicolumn{1}{c} \checkmark & ET, FER, cognitive abilities & K-means, CNN, RF, weighted DT & Effective performance, optimized method, lower time complexity & Small sample size, limited scope of modalities \\
+\hline\noalign{\smallskip}
+\cite{fus7} & 2021 & \multicolumn{1}{c} - & \multicolumn{1}{c} \checkmark & FER, AC\textsuperscript{a}  & Fuzzy ELM + DEAF  & Increased performance among different age group  & Complex dimensionality . \\
+\vspace{4mm}
+\cite{fus8} & 2024 & \multicolumn{1}{c} - & \multicolumn{1}{c} \checkmark &fMRI, age, IQ & Federated learning + Hypergraph Neural Network  & Improved diagnostic accuracy and preserving patient privacy .& Small sample size and potential information loss during fusion. \\
+\hline\noalign{\smallskip}
+\cite{fus9} & 2021 & \multicolumn{1}{c} \checkmark & \multicolumn{1}{c} - & EEG, ET, HRV, breath-sensing & VR based system & User-friendly, automatic non-invasive data collection, and provides evaluation of severity and treatment & - \\
+\hline\noalign{\smallskip}
+\cite{fus10} & 2023 & \multicolumn{1}{c} - & \multicolumn{1}{c} \checkmark & speech, FER, AC\textsuperscript{a}, JA\textsuperscript{b}, SA\textsuperscript{c}, ET, head-pose & ResNet-50, YOLOv5, MLP, Kaldi & Standardized system & - \\
+\hline\noalign{\smallskip}
+\cite{fus11} & 2017 & \multicolumn{1}{c} - & \multicolumn{1}{c} \checkmark & EEG, fMRI, DTI, sMRI & ICA & Predictive model for neural correlates & Small sample size, not validated on TD population \\
+\hline\noalign{\smallskip}
+\cite{fus12} & 2020 & \multicolumn{1}{c} - & \multicolumn{1}{c} \checkmark & EEG, fMRI & Multilevel Modelling(MLM) framework & Provided key relationship between EEG and fMRI. & Small subject size, less diverse population and only severe-functioning ASD population were included\\
+\noalign{\smallskip}\hline
+\multicolumn{8}{l}{\footnotesize *C: conference; J: journal; a: activity comprehension, b: joint attention, c: separation anxiety}
+\end{tabular}
+\caption{Summary of multimodal fusion works in the literature.}
+\label{fus_tab}
+\end{table*}
+
+Jingying Chen et al. \cite{fus6} presented a multimodal framework that fuses data on children’s eye fixation, facial expression, and cognitive level abilities to identify children with ASD effectively and economically efficiently. Feature extraction was done on eye fixation data using k-means algorithm, a CNN-based FER algorithm with soft labels was used to detect the facial expression of the children, and social cognitive level questionnaires were used to extract features representing the cognitive levels of the children. A Random Forest algorithm based on weighted decision trees was employed in the classification model which was fed to a decision-level fusion layer. A diagnosis software using a fuzzy hybrid deep convolutional neural network with a fusion of facial expressions and human gaits is presented by Saranya et al.\cite{fus7}. A fuzzy-based Extreme Learning Machine - ELM network was used, in which the fully connected layers were replaced with a proposed Deep Extreme Adaptive Fuzzy (DEAF) learning algorithm to provide the final classification. The classification model worked in 2 phases, the first phase included facial feature extraction trained on FERI and KDEF datasets, and the second phase included extraction of spatiotemporal gait features which was trained in CASIA dataset. This experiment highlighted the superior performance achieved from the proposed hybrid DEAF- fuzzy ELM network. They have also highlighted the increase in performance from fusing feature maps of FER and gait modality data.
+
+Haishuai Wang et al.\cite{fus8} highlighted the privacy and ethical concerns in deep learning approaches for ASD diagnosis, and described the challenges in collecting datasets from various medical centers and fusing them without loss of privacy. To address the privacy concerns, they have developed a deep learning framework, FedHNN, using federated learning and Hypergraph Neural Networks. This allows the local models to be trained and computed independently in a decentralized manner avoiding data sharing, enabling rapid scaling of medical datasets and deep learning models. This highlighted how FedHNN addresses privacy concerns and improves diagnostic accuracy without data sharing using hypergraph-based multimodal feature fusion with federated learning. Yan-Qing Chen et al.\cite{fus9} presented a VR-based system for training and assessment of ASD in children, integrating multi-modal sensing technologies, including eye tracking, EEG, HRV, breath sensing, joint attention tasks, and evaluation instruments such as ADOS, SRC, and CBCL, they have developed a VR assistance system using machine learning to perform statistical analysis of the data. This system is presented in a game-oriented way and therapy sessions for the participants. This emphasizes how ASD is used to assess diagnosis, severity, and social behavior treatment.
+
+Ming Chen et al. \cite{fus10} presented a standardized framework for the automatic assessment of children's diverse social interaction skills via audio-visual inputs. A highly fitted testing studio with various sensors, cameras, and microphones was proposed, this testing studio provided a standardized way of collecting data such as facial expression, eye gaze, interactions, and speech. This system has made significant efforts to ensure the complete extraction of data without errors for ET, FER, speech recognition, head-pose, gestures, and Joint Attention using various models in Multi-person identification, tracking, and localization to extract informational features for the said data types. 
+%This system evaluates certain paradigm based rules that are proposed in the work, Further systematically evaluates the children’s gestures, eye gaze, facial expression, head-pose, joint attention, and speech.
+% \begin{figure}
+% 	\centerline{\includegraphics[scale=0.29]{namit10.pdf}}
+% 	\caption{A testing studio for data collection proposed by Ming Chen et al. (Source: \cite{fus10})}
+% 	\label{fus10}
+% \end{figure}
+
+B.A. Cociu et al.\cite{fus11} conducted an experimental study of the correlation between functional connectivity, structural connectivity, and EEG signals from the brain. They have experimentally collected data from EEG, fMRI, and DTI scans through non-invasive systems to extract the structural and functional connectivity for structural modality and EEG for a temporal resolution of the brain. A rare case of three-way multimodal fusion of EEG-fMRI-DTI data was presented to correlate differences in the measures of brain connectivity to enhance insights on neural correlates of neurodevelopmental disease. Mash L.E. et al.\cite{fus12} explored the differences in brain activity and connectivity in the ASD population. They mainly investigated the relationship between brain activity from EEG and thalamocortical functional connectivity from fMRI. Their key research findings include reduced brain waves (alpha power) in occipito-parietal region (back part of the brain), indicating atypical neural activity. There was increased activity in the right temporal area and over-connectivity between the thalamus and cortical regions. Multimodal analysis revealed that there were weaker and negative relationships between alpha power and brain connectivity like ALFF and thalamocortical functional connectivity. This led to the conclusion of disrupted communication between the thalamus and cortex, indicating atypical regulation of brain rhythms in the ASD population. Further information about the multimodal fusion articles used in this review is detailed in Table \ref{fus_tab}.
+% Han et al. \cite{fus1} combined EEG and eye-tracking data using a multimodal stacked denoising autoencoder, achieving improved classification between ASD and TD children. Wei et al. \cite{fus2} fused data from autism assessment tools like MCHAT and ADOS, with XGB delivering the best performance in classifying ASD, DLD, and GDD. Moon et al. \cite{fus3} applied multimodal fusion in virtual reality to track autistic adolescents' cognitive development, while Khare et al. \cite{fus4} demonstrated the importance of integrating EEG, ET, and facial recognition data for more accurate detection of developmental disorders. Prakash et al. \cite{fus5} fused video data for analyzing social behaviors and emotions in autistic children, while Chen et al. \cite{fus6} integrated speech and behavioural data to enhance ASD diagnostic precision. Saranya et al. \cite{fus7} used facial and gait fusion to predict ASD more effectively, and Wang et al. \cite{fus8} employed privacy-preserving fusion of neuroimaging and personal data for improved diagnostic accuracy. Chen et al. \cite{fus9} developed a VR-based system combining EEG and motion capture for dynamic assessments, while Cheng et al. \cite{fus10} used behavioural signal processing to identify complex communication patterns in ASD children. Cociu et al. \cite{fus11} and Mash et al. \cite{fus12} fused neuroimaging techniques like EEG, fMRI, and DTI to explore brain connectivity, providing deeper insights into ASD’s neural underpinnings.
+\subsection{Advantages of Multimodal Data Fusion Techniques}
+The advantages of multi-modal data fusion techniques in the diagnostic assessment of Autism Spectrum Disorder (ASD) include their ability to integrate diverse modalities, which provides a more comprehensive and accurate understanding of the disorder \cite{fus1}. By combining multiple modalities such as EEG, MRI, ET, and others, these techniques can leverage the strengths of each individual modality while reducing their respective weaknesses. This approach is particularly beneficial in capturing the full spectrum of ASD symptoms, which often presents across both neurophysiological and behavioral dimensions\cite{fus8}.
+The key objective is to enhance the diagnostic accuracy \cite{fus8}. Single-modality models may overlook or misinterpret certain ASD traits due to the limitations inherent in focusing on one data type. However, multi-modal fusion techniques can interpret information from various sources, reducing the risk of misdiagnosis and improving the reliability of the assessment\cite{fus2}. For example, integrating neuroimaging data with behavioral observations can help identify subtle patterns that might not be evident when analyzing those modalities alone.
+Another significant advantage is the ability to capture complementary information\cite{fus1}. Different modalities often provide unique perspectives on the same phenomenon, and their combination can reveal hidden correlations and interactions that would be difficult to detect using single-modality data\cite{fus1}. This is especially important in the context of ASD, where the disorder's complexity necessitates a multi-faceted approach to diagnosis.
+Multi-modal data fusion techniques facilitate the early detection of ASD\cite{fus5, fus6}. The integration of diverse data types allows for the identification of early biomarkers and subtle behavioral indicators that might not be detectable through traditional single-modality models. Early detection is critical for timely intervention, which significantly improves adaptions for the ASD population.
+These techniques are also advantageous in their ability to exploit high-dimensional data. Multi-modal approaches can handle complex, multi-dimensional datasets, extracting more meaningful information without significantly increasing the size of the database\cite{fus1}. This capability is particularly valuable when analyzing time-series data and video recordings, where capturing temporal dynamics is essential for understanding the progression of ASD symptoms.
+Lastly, the scalability of multi-modal data fusion techniques presents a unique advantage. As healthcare technology advances and the availability of diverse data sources increases, these techniques can be scaled to accommodate larger datasets and more complex models. This scalability ensures that as new modalities and data types emerge, they can be seamlessly integrated into existing diagnostic frameworks, continually enhancing the accuracy and effectiveness of ASD assessments \cite{fus1}.
+% Multimodal data fusion techniques offer significant improvements in ASD diagnosis by integrating diverse data sources, such as neuroimaging and behavioural assessments, which capture a fuller spectrum of ASD symptoms \cite{fus1, fus2}. These approaches reduce information loss and improve model robustness by combining complementary features across modalities. The fusion of different types of data, like EEG and eye-tracking \cite{fus1}, leads to more accurate early detection and personalized interventions. Additionally, it allows for better classification between ASD and other developmental disorders \cite{fus2}, while handling complex ASD manifestations \cite{fus5}. Lastly, Multimodal fusion aids in uncovering deeper neurological and behavioural insights, enhancing the understanding of ASD's diverse presentations \cite{fus11,fus12}.
+\section{Real World Challenges in Multimodal Data Fusion Techniques}
+Multimodal data fusion strategies in diagnosing Autism Spectrum Disorder (ASD) present several technical and practical real-world challenges. The primary issue that is presented in most MMDFT systems is the high computational cost associated with these models, mainly during the training phase. The Multimodal Stacked Denoising Autoencoder (MMSDAE) model integrating EEG and ET modalities requires substantial computational resources due to its complex architecture with multiple SDAE models\cite{fus1}. This complexity necessitates a trade-off between diagnostic performance and computational cost, making it challenging to deploy these models in real-time clinical settings. Moreover, the practical deployment of such models requires the simultaneous availability of multiple modality data which may be unfeasible. In many cases, collecting these data simultaneously poses financial challenges, particularly in environments where resources are limited. Another significant challenge is the unavailability of comprehensive multimodality neuroimaging datasets. While MMDFT models have shown promising increases in the accuracy of ASD diagnosis in clinical studies, the lack of accessible multimodal datasets for these modalities hinders further research and development. The scarcity of such datasets limits the ability to validate and refine multimodal data fusion models, thereby slowing the progress of integrating these advanced techniques into routine diagnostic assessments \cite{fus1, fus4}.
+
+Additionally, the real-world application of these faces difficulties related to data heterogeneity, synchronization, and quality. Multimodal data often come from different sources and vary in format, resolution, and sampling rates, making it difficult to effectively align and integrate the data. This heterogeneity leads to inconsistencies in the fusion process, ultimately affecting the model's performance. Furthermore, ensuring the quality of data across all modalities is crucial, as poor data quality negatively impacts the overall diagnostic outcome \cite{fus6,fus8}.
+Another layer of complexity is introduced by the dynamic nature of ASD symptoms, which fluctuate over time or vary in response to different environmental stimulants. These temporal variations require models to not only integrate multimodal data but also account for changes over time, necessitating the use of advanced temporal fusion techniques that can handle temporal connections. The development of such models is still in its infancy and presents a significant research challenge. Scalability is a major concern. While small-scale studies have concluded with the potential of multimodal data fusion techniques, scaling such methods to diverse demographics with broader populations and varying clinical presentations remains an unresolved challenge. The computational infrastructure and resources required to manage and process large-scale multimodal datasets can be challenging, especially in under-resourced healthcare settings \cite{fus5, fus11}. 
+
+Furthermore, the ethical and privacy concerns associated with collecting and using multimodal data in healthcare environments cannot be overlooked. The integration of data from multiple sources, some of which may be highly sensitive (e.g., facial expression data), raises significant concerns about patient consent, data security, and the potential for misuse. Establishing secure frameworks for data governance and ensuring compliance with ethical standards and policy is critical \cite{fus8}. Finally, the interpretability of multimodal models remains as a major challenge. As these models become increasingly complex and higher dimensional\cite{fus7}, understanding and explaining their decisions to clinicians and patients becomes highly difficult. This lack of transparency can be a barrier to the acceptance and adoption of multimodal techniques in clinical environments, where clear and understandable results are critical for decision-making \cite{fus4}.
+% The application of multimodal data fusion techniques for ASD (ASD) diagnosis encounters several real-world challenges. A significant concern is the high computational cost associated with complex models like the Multimodal Stacked Denoising Autoencoder (MMSDAE) in \cite{fus1}, which complicates their use in real-time clinical settings \cite{fus1}. Additionally, the simultaneous acquisition of multimodal data, such as EEG and Eye Tracking (ET), often presents practical difficulties, particularly in resource-constrained environments \cite{fus2}.
+% Another hurdle is the lack of comprehensive multimodal neuroimaging datasets, which hampers research and validation of these methodologies \cite{fus4}. The fusion process is further complicated by data heterogeneity and synchronization issues, as different modalities vary in format, resolution, and quality \cite{fus3}. The temporal variability of ASD symptoms necessitates sophisticated models capable of accommodating these changes, adding complexity to the diagnostic process \cite{fus11}.
+% Scalability is a challenge; while small-scale studies have demonstrated the promise of multimodal data fusion techniques, extending these methods to larger, diverse populations remains unresolved \cite{fus8}. Ethical issues surrounding data privacy and security, particularly concerning sensitive neuroimaging data, complicate data governance \cite{fus10}. Finally, the interpretability of complex multimodal models presents barriers, making it difficult for clinicians to understand and trust the outcomes, ultimately obstructing their implementation in clinical environments \cite{fus6}.
+\section{Conclusion}
+In conclusion, ASD is an intricate and multifaceted neurodevelopmental disorder that presents significant challenges for reliable diagnosis. Traditional clinical methods often rely on personal assessments, leading to inconsistent and delayed diagnoses. New AI-based models have been developed, aimed at distinguishing between ASD and TD populations, but they often produce biased results based on limited datasets. These models miss important traits due to their inability to capture complex relationships between modalities, highlighting the need for more robust approaches. Multimodal data fusion techniques (MMDFT) offer a promising solution by leveraging various modalities to learn intricate relationships, enabling a more comprehensive understanding of ASD. This approach facilitates the identification of patterns that traditional methods overlook, facilitating earlier detection and tailored interventions that can improve the adaptability of the conditions faced by ASD cohorts. This article also discusses various limitations, including data heterogeneity, computational complexity, and the accessibility of multimodal datasets. Future research should aim to optimize fusion algorithms and ensure practical applications in clinical institutions, while interdisciplinary collaboration will be crucial for developing effective frameworks for integrating MMDFT into diagnostic practices. Ultimately, the advancement of ASD diagnosis will depend on effectively integrating multimodal data fusion techniques alongside traditional methodologies. Addressing existing challenges will be vital in creating objective and scalable diagnostic tools that meet the diverse needs of the ASD population. Current limitations faced by this review include the small size of reviewed fusion articles, the need for the inclusion of modalities such as speech, questionnaires, DTI, and various common data such as age, and IQ. This provides a limited scope of multimodal data proposed in an ideal system. 
+\bibliographystyle{IEEEtran}
+%\bibliography{ref}
+\begin{thebibliography}{1}
+\bibitem{1}
+C.~Sarmiento, C.~Lau, B.~Carducci, C.~Nave, A.~Fabio, D.~Saklofske, and
+C.~Stough, ``Diagnostic and statistical manual of mental disorders, 5th ed.:
+Dsm‐5,'' pp. 125--129, 11 2020.
+
+\bibitem{97}
+A.~Alabdali, L.~Al-Ayadhi, and A.~El-Ansary, ``Association of social and
+cognitive impairment and biomarkers in autism spectrum disorders,''
+\emph{Journal of neuroinflammation}, vol.~11, p.~4, 01 2014.
+
+\bibitem{2}
+S.~Rahman, S.~F. Ahmed, O.~Shahid, M.~Arrafi, and M.~A.~R. Ahad, ``Automated
+detection approaches to autism spectrum disorder based on human activity
+analysis: A review,'' \emph{Cognitive Computation}, vol.~14, 07 2021.
+
+\bibitem{96}
+E.~Neuhaus, T.~P. Beauchaine, and R.~Bernier, ``Neurobiological correlates of
+social functioning in autism,'' \emph{Clinical Psychology Review}, vol.~30,
+no.~6, pp. 733--748, 2010.
+
+\bibitem{3}
+J.~Kang, X.~Han, J.~Song, Z.~Niu, and X.~Li, ``The identification of children
+with autism spectrum disorder by svm approach on eeg and eye-tracking data,''
+\emph{Computers in Biology and Medicine}, vol. 120, p. 103722, 03 2020.
+
+\bibitem{98}
+I.~Rapin and R.~Tuchman, ``Autism: Definition, neurobiology, screening,
+diagnosis,'' \emph{Pediatric clinics of North America}, vol.~55, pp.
+1129--46, viii, 11 2008.
+
+\bibitem{4}
+B.~Abrahams and D.~Geschwind, ``Advances in autism genetics: On the threshold
+of a new neurobiology,'' \emph{Nature reviews. Genetics}, vol.~9, pp.
+341--55, 06 2008.
+
+\bibitem{5}
+E.~Stevens, D.~Dixon, M.~Novack, D.~Granpeesheh, T.~Smith, and E.~Linstead,
+``Identification and analysis of behavioral phenotypes in autism spectrum
+disorder via unsupervised machine learning,'' \emph{International Journal of
+	Medical Informatics}, vol. 129, 05 2019.
+
+\bibitem{99}
+B.~Kuzmanovic, L.~Schilbach, F.~Lehnhardt, G.~Bente, and K.~Vogeley, ``A matter
+of words: Impact of verbal and nonverbal information on impression formation
+in high-functioning autism,'' \emph{Research in Autism Spectrum Disorders},
+vol.~5, pp. 604--613, 03 2011.
+
+\bibitem{95}
+A.~Posar and P.~Visconti, ``Early motor signs in autism spectrum disorder,''
+\emph{Children}, vol.~9, no.~2, p. 294, 2022.
+
+\bibitem{6}
+Y.-h. e.~a. Jiang, ``Detection of clinically relevant genetic variants in
+autism spectrum disorder by whole-genome sequencing.'' \emph{American journal
+	of human genetics}, vol.~93, pp. 249--63, 05 2013.
+
+\bibitem{7}
+B.~J. O'Roak and M.~W. State, ``Autism genetics: strategies, challenges, and
+opportunities,'' \emph{Autism Research}, vol.~1, no.~1, pp. 4--17, 2008.
+
+\bibitem{8}
+G.~Xu, L.~Strathearn, B.~Liu, and W.~Bao, ``Prevalence of autism spectrum
+disorder among us children and adolescents, 2014-2016,'' \emph{JAMA}, vol.
+319, p.~81, 01 2018.
+
+\bibitem{9}
+A.~Knopf, ``Autism prevalence increases from 1 in 60 to 1 in 54: Cdc,''
+\emph{The Brown University Child and Adolescent Behavior Letter}, vol.~36,
+pp. 4--4, 06 2020.
+
+\bibitem{10}
+M.~Maenner, K.~Shaw, J.~Baio, A.~Washington, M.~Patrick, M.~DiRienzo,
+D.~Christensen, L.~Wiggins, S.~Pettygrove, J.~Andrews, M.~Lopez, A.~Hudson,
+T.~Baroud, Y.~Schwenk, T.~White, C.~Rosenberg, L.-C. Lee, R.~Harrington,
+M.~Huston, and P.~Dietz, ``Prevalence of autism spectrum disorder among
+children aged 8 years — autism and developmental disabilities monitoring
+network, 11 sites, united states, 2016,'' \emph{MMWR. Surveillance
+	Summaries}, vol.~69, pp. 1--12, 03 2020.
+
+\bibitem{11}
+Yazdani, A.~Capuano, M.~Ghaziuddin, and C.~Colombi, ``Exclusion criteria used
+in early behavioral intervention studies for young children with autism
+spectrum disorder,'' \emph{Brain Sciences}, vol.~10, p.~99, 02 2020.
+
+\bibitem{12}
+A.~C. Tse and R.~S. Masters, ``Improving motor skill acquisition through
+analogy in children with autism spectrum disorders,'' \emph{Psychology of
+	Sport and Exercise}, vol.~41, pp. 63--69, 2019.
+
+\bibitem{13}
+O.~Hamdoun, ``Autism spectrum disorders, is it under reported in third world
+countries,'' \emph{American Journal of Biomedical Science \& Research},
+vol.~4, pp. 292--293, 08 2019.
+
+\bibitem{dc1}
+S.~Raina, V.~Chander, A.~Bhardwaj, D.~Kumar, S.~Sharma, V.~Kashyap, M.~Singh,
+and A.~Bhardwaj, ``Prevalence of autism spectrum disorder among rural, urban,
+and tribal children (1-10 years of age),'' \emph{Journal of neurosciences in
+	rural practice}, vol.~8, no.~3, 2017.
+
+\bibitem{dc2}
+C.~L. Narayan and T.~John, ``The rights of persons with disabilities act, 2016:
+Does it address the needs of the persons with mental illness and their
+families,'' \emph{Indian journal of psychiatry}, vol.~59, no.~1, pp. 17--20,
+2017.
+
+\bibitem{14}
+L.~Zwaigenbaum, M.~Bauman, R.~Choueiri, D.~Fein, C.~Kasari, K.~Pierce,
+W.~Stone, N.~Yirmiya, A.~M. Estes, R.~Hansen, J.~McPartland, M.~Natowicz,
+T.~Buie, A.~Carter, P.~Davis, D.~Granpeesheh, Z.~Mailloux, C.~Newschaffer,
+D.~Robins, and A.~Wetherby, ``Early identification and interventions for
+autism spectrum disorder: Executive summary,'' \emph{PEDIATRICS}, vol. 136,
+pp. S1--S9, 10 2015.
+
+\bibitem{15}
+M.~Fakhoury, ``Autistic spectrum disorders: A review of clinical features,
+theories and diagnosis,'' \emph{International Journal of Developmental
+	Neuroscience}, vol.~43, pp. 70--77, 04 2015.
+
+\bibitem{16}
+T.~Attwood, ``Asperger's syndrome,'' \emph{Tizard Learning Disability Review},
+vol.~11, pp. 3--11, 2006.
+
+\bibitem{17}
+E.~Smeets, K.~Pelc, and B.~Dan, ``Rett syndrome,'' \emph{Molecular
+	Syndromology}, vol.~2, no. 3-5, pp. 113--127, 04 2012.
+
+\bibitem{18}
+S.~H. Charan, ``Childhood disintegrative disorder,'' \emph{Journal of Pediatric
+	Neurosciences}, vol.~7, pp. 55--57, 01-04 2012.
+
+\bibitem{117}
+M.~J. Ellis, K.~Larsen, and S.~S. Havighurst, ``Childhood disintegrative
+disorder (cdd): Symptomatology of the norwegian patient population and
+parents’ experiences of patient regression,'' \emph{Journal of autism and
+	developmental disorders}, vol.~52, no.~4, pp. 1495--1506, 2022.
+
+\bibitem{19}
+E.~Singer, ``Diagnosis: Redefining autism,'' \emph{Nature}, vol. 491, pp.
+S12--3, 11 2012.
+
+\bibitem{20}
+K.~E. Towbin, \emph{Pervasive Developmental Disorder Not Otherwise
+	Specified}.\hskip 1em plus 0.5em minus 0.4em\relax John Wiley \& Sons, Ltd,
+2005, ch.~6, pp. 165--200.
+
+\bibitem{100}
+A.~Soltiyeva, W.~Oliveira, M.~Alimanova, J.~Hamari, K.~Gulzhan~Kansarovna,
+S.~Adilkhan, and M.~Urmanov, ``Understanding experiences and interactions of
+children with asperger’s syndrome in virtual reality-based learning
+systems,'' \emph{Interactive Learning Environments}, pp. 1--23, 2024.
+
+\bibitem{102}
+M.~Arnold, R.~Netson, and A.~Vyshedskiy, ``Combinatorial language parent-report
+scores differ significantly between typically developing children and those
+with autism spectrum disorders,'' \emph{Journal of Autism and Developmental
+	Disorders}, vol.~54, no.~1, pp. 326--338, 2024.
+
+\bibitem{101}
+U.~Petriti, D.~C. Dudman, E.~Scosyrev, and S.~Lopez-Leon, ``Global prevalence
+of rett syndrome: systematic review and meta-analysis,'' \emph{Systematic
+	Reviews}, vol.~12, no.~1, p.~5, 2023.
+
+\bibitem{21}
+F.~Volkmar, B.~Reichow, and J.~McPartland, ``Classification of autism and
+related conditions: Progress, challenges, and opportunities,''
+\emph{Dialogues in clinical neuroscience}, vol.~14, pp. 229--37, 09 2012.
+
+\bibitem{33}
+C.~Lord, M.~L. Rutter, and A.~L. Couteur, ``Autism diagnostic
+interview-revised: A revised version of a diagnostic interview for caregivers
+of individuals with possible pervasive developmental disorders,''
+\emph{Journal of Autism and Developmental Disorders}, vol.~24, pp. 659--685,
+1994.
+
+\bibitem{34}
+B.~R.~R. Eric~Schopler, Robert Jay~Reichler, ``The childhood autism rating
+scale (cars) : for diagnostic screening and classification of autism,''
+\emph{Western Psychological Services}, 2010.
+
+\bibitem{fus1}
+J.~Han, G.~Jiang, G.~Ouyang, and X.~Li, ``A multimodal approach for identifying
+autism spectrum disorders in children,'' \emph{IEEE Transactions on Neural
+	Systems and Rehabilitation Engineering}, vol.~30, pp. 1--1, 07 2022.
+
+\bibitem{fus10}
+M.~Cheng, Y.~Zhang, Y.~Xie, Y.~Pan, X.~Li, W.~Liu, C.~Yu, D.~Zhang, Y.~Xing,
+X.~Huang \emph{et~al.}, ``Computer-aided autism spectrum disorder diagnosis
+with behavior signal processing,'' \emph{IEEE Transactions on Affective
+	Computing}, vol.~14, no.~4, pp. 2982--3000, 2023.
+
+\bibitem{116}
+J.~M. Vicente-Samper, E.~Avila-Navarro, and J.~M. Sabater-Navarro, ``Data
+acquisition devices towards a system for monitoring sensory processing
+disorders,'' \emph{IEEE Access}, vol.~8, pp. 183\,596--183\,605, 2020.
+
+\bibitem{110}
+S.~Raj and S.~Masood, ``Analysis and detection of autism spectrum disorder
+using machine learning techniques,'' \emph{Procedia Computer Science}, vol.
+167, pp. 994--1004, 2020.
+
+\bibitem{111}
+M.~S. Farooq, R.~Tehseen, M.~Sabir, and Z.~Atal, ``Detection of autism spectrum
+disorder (asd) in children and adults using machine learning,''
+\emph{scientific reports}, vol.~13, no.~1, p. 9605, 2023.
+
+\bibitem{113}
+K.~Vakadkar, D.~Purkayastha, and D.~Krishnan, ``Detection of autism spectrum
+disorder in children using machine learning techniques,'' \emph{SN computer
+	science}, vol.~2, pp. 1--9, 2021.
+
+\bibitem{115}
+R.~A. Rasul, P.~Saha, D.~Bala, S.~R.~U. Karim, M.~I. Abdullah, and B.~Saha,
+``An evaluation of machine learning approaches for early diagnosis of autism
+spectrum disorder,'' \emph{Healthcare Analytics}, vol.~5, p. 100293, 2024.
+
+\bibitem{105}
+M.~Z. Uddin, M.~A. Shahriar, M.~N. Mahamood, F.~Alnajjar, M.~I. Pramanik, and
+M.~A.~R. Ahad, ``Deep learning with image-based autism spectrum disorder
+analysis: A systematic review,'' \emph{Engineering Applications of Artificial
+	Intelligence}, vol. 127, p. 107185, 2024.
+
+\bibitem{112}
+R.~A.~J. De~Belen, T.~Bednarz, A.~Sowmya, and D.~Del~Favero, ``Computer vision
+in autism spectrum disorder research: a systematic review of published
+studies from 2009 to 2019,'' \emph{Translational psychiatry}, vol.~10, no.~1,
+p. 333, 2020.
+
+\bibitem{114fmri}
+M.~Liu, B.~Li, and D.~Hu, ``Autism spectrum disorder studies using fmri data
+and machine learning: a review,'' \emph{Frontiers in Neuroscience}, vol.~15,
+p. 697870, 2021.
+
+\bibitem{22}
+R.~Militerni, C.~Bravaccio, C.~Falco, C.~Fico, and M.~t. Palermo, ``Repetitive
+behavior in autistic disorder,'' \emph{European child \& adolescent
+	psychiatry}, vol.~11, pp. 210--8, 11 2002.
+
+\bibitem{fus10_40}
+J.~G. Frohna, ``Failure to respond to name is indicator of possible autism
+spectrum disorder,'' \emph{The Journal of Pediatrics}, vol. 151, no.~3, pp.
+327--328, 2007.
+
+\bibitem{23}
+D.~Faso, N.~Sasson, and A.~Pinkham, ``Evaluating posed and evoked facial
+expressions of emotion from adults with autism spectrum disorder,''
+\emph{Journal of Autism and Developmental Disorders}, pp. 75--89, 07 2014.
+
+\bibitem{24}
+G.~L.~W. Madeline B Harms~1, Alex~Martin, ``Facial emotion recognition in
+autism spectrum disorders: a review of behavioral and neuroimaging studies,''
+\emph{Neuropsychology review}, vol.~20, p. 290–322, 09 2010.
+
+\bibitem{27}
+I.~J. Oosterling, M.~Wensing, S.~H. Swinkels, R.~J. Van Der~Gaag, J.~C. Visser,
+T.~Woudenberg, R.~Minderaa, M.-P. Steenhuis, and J.~K. Buitelaar, ``Advancing
+early detection of autism spectrum disorder by applying an integrated
+two-stage screening approach,'' \emph{Journal of Child Psychology and
+	Psychiatry}, vol.~51, no.~3, pp. 250--258, 2010.
+
+\bibitem{aba}
+F.~J. Alves, E.~A. De~Carvalho, J.~Aguilar, L.~L. De~Brito, and G.~S. Bastos,
+``Applied behavior analysis for the treatment of autism: A systematic review
+of assistive technologies,'' \emph{IEEE Access}, vol.~8, pp.
+118\,664--118\,672, 2020.
+
+\bibitem{sit}
+C.~M. Holland, E.~I. Blanche, and B.~L. Thompson, ``Quantifying therapists’
+activities during sensory integration treatment for young children with
+autism,'' \emph{Physical \& occupational therapy in pediatrics}, vol.~41,
+no.~3, pp. 284--299, 2020.
+
+\bibitem{comm}
+W.~Farzana, F.~Sarker, T.~Chau, and K.~A. Mamun, ``Technological evolvement in
+aac modalities to foster communications of verbally challenged asd children:
+A systematic review,'' \emph{IEEE Access}, 2021.
+
+\bibitem{25}
+J.~Virués-Ortega, F.~Julio, and R.~Pastor-Barriuso, ``The teacch program for
+children and adults with autism: A meta-analysis of intervention studies,''
+\emph{Clinical psychology review}, vol.~33, pp. 940--953, 07 2013.
+
+\bibitem{26}
+P.~Nohama, ``Teacch methodology-based web system to support learning for
+children with autism,'' \emph{IEEE Latin America Transactions}, vol.~16,
+no.~11, p. 2698–2705, 06 2019.
+
+\bibitem{29}
+C.~Lord, S.~Risi, P.~DiLavore, C.~Shulman, A.~Thurm, and A.~Pickles, ``Autism
+from 2 to 9 years of age,'' \emph{Archives of general psychiatry}, vol.~63,
+pp. 694--701, 07 2006.
+
+\bibitem{57}
+J.~Barbaro and C.~Dissanayake, ``Autism spectrum disorders in infancy and
+toddlerhood: A review of the evidence on early signs, early identification
+tools, and early diagnosis,'' \emph{Journal of developmental and behavioral
+	pediatrics : JDBP}, vol.~30, pp. 447--59, 10 2009.
+
+\bibitem{30}
+R.~Hoefman, N.~Payakachat, J.~Exel, K.~Kuhlthau, E.~Kovacs, J.~Pyne, and
+J.~Tilford, ``Caring for a child with autism spectrum disorder and parents'
+quality of life: Application of the carerqol,'' \emph{Journal of autism and
+	developmental disorders}, pp. 1933--45, 02 2014.
+
+\bibitem{31}
+J.~Matson, J.~Boisjoli, M.~González, K.~Smith, and J.~Wilkins, ``Norms and cut
+off scores for the autism spectrum disorders diagnosis for adults (asd-da)
+with intellectual disability,'' \emph{Research in Autism Spectrum Disorders},
+vol.~1, pp. 330--338, 10 2007.
+
+\bibitem{icd10}
+W.~H. Organization, ``Icd-10 : international statistical classification of
+diseases and related health problems : tenth revision,'' pp. Spanish version,
+1st edition published by PAHO as Publicación Científica 544, 2004.
+
+\bibitem{35}
+M.~Dereu, \emph{Modified Checklist for Autism in Toddlers (M-CHAT)}.\hskip 1em
+plus 0.5em minus 0.4em\relax Springer International Publishing, 2021, pp.
+2938--2943.
+
+\bibitem{32}
+T.~Dorlack, O.~Myers, and P.~Kodituwakku, ``A comparative analysis of the
+ados-g and ados-2 algorithms: Preliminary findings,'' \emph{Journal of Autism
+	and Developmental Disorders}, vol.~48, pp. 2078--2089, 06 2018.
+
+\bibitem{dc3}
+S.~Chakraborty, P.~Thomas, T.~Bhatia, V.~L. Nimgaonkar, and S.~N. Deshpande,
+``Assessment of severity of autism using the indian scale for assessment of
+autism,'' \emph{Indian journal of psychological medicine}, vol.~37, no.~2,
+pp. 169--174, 2015.
+
+\bibitem{48}
+M.~J. Alhaddad, M.~I. Kamel, H.~M. Malibary, E.~A. Alsaggaf, K.~Thabit,
+F.~Dahlwi, and A.~A. Hadi, ``Diagnosis autism by fisher linear discriminant
+analysis flda via eeg,'' \emph{International Journal of Bio-Science and
+	Bio-Technology}, vol.~4, no.~2, pp. 45--54, 2012.
+
+\bibitem{38}
+A.~Di~Martino, C.-G. Yan, Q.~Li, E.~Denio, F.~Castellanos, K.~Alaerts,
+J.~Anderson, M.~Assaf, S.~Bookheimer, M.~Dapretto, B.~Deen, S.~Delmonte,
+I.~Dinstein, E.-W. Birgit, D.~Fair, L.~Gallagher, D.~Kennedy, C.~Keown,
+C.~Keysers, and M.~Milham, ``The autism brain imaging data exchange: Towards
+large-scale evaluation of the intrinsic brain architecture in autism,''
+\emph{Molecular psychiatry}, vol.~19, 06 2013.
+
+\bibitem{39}
+A.~Di~Martino, D.~O'Connor, B.~Chen, and K.~Alaerts, ``Enhancing studies of the
+connectome in autism using the autism brain imaging data exchange ii,''
+\emph{Scientific data}, vol.~4, p. 170010, March 2017.
+
+\bibitem{47}
+S.~S. Rajagopalan, A.~Dhall, and R.~Goecke, ``Self-stimulatory behaviours in
+the wild for autism diagnosis,'' 12 2013, pp. 755--761.
+
+\bibitem{40}
+F.~Negin, B.~Ozyer, S.~Agahian, S.~Kacdioglu, and G.~T. Ozyer,
+``Vision-assisted recognition of stereotype behaviors for early diagnosis of
+autism spectrum disorders,'' \emph{Neurocomputing}, vol. 446, pp. 145--155,
+2021.
+
+\bibitem{41}
+O.~Rihawi, D.~Merad, and J.-L. Damoiseaux, ``3d-ad: 3d-autism dataset for
+repetitive behaviours with kinect sensor,'' 08 2017, pp. 1--6.
+
+\bibitem{43}
+H.~Duan, G.~Zhai, X.~Min, Z.~Che, F.~Yi, X.~Yang, J.~Gutiérrez, and
+P.~Le~Callet, ``A dataset of eye movements for the children with autism
+spectrum disorder,'' 06 2019, pp. 255--260.
+
+\bibitem{44}
+A.~Shihab, F.~Dawood, and D.~Kashmar, ``Data analysis and classification of
+autism spectrum disorder using principal component analysis,'' \emph{Advances
+	in Bioinformatics}, vol. 2020, p. 8 pages, 01 2020.
+
+\bibitem{45}
+A.~Abdulrahman, I.~Hadi, and Y.~Rajihy, ``Generating 3d dataset of gait and
+full body movement of children with autism spectrum disorders collected by
+kinect v2 camera,'' 09 2020.
+
+\bibitem{42}
+A.~Zunino, P.~Morerio, A.~Cavallo, C.~Ansuini, J.~Podda, F.~Battaglia,
+C.~Becchio, and V.~Murino, ``Video gesture analysis for autism spectrum
+disorder detection,'' 09 2018.
+
+\bibitem{46}
+V.~Yaneva, L.~Ha, S.~Eraslan, Y.~Yesilada, and R.~Mitkov, ``Detecting autism
+based on eye-tracking data from web searching tasks,'' 04 2018, pp. 1--10.
+
+\bibitem{131}
+E.~Billing, T.~Belpaeme, H.~Cai, H.-L. Cao, A.~Ciocan, C.~Costescu, D.~David,
+R.~Homewood, D.~Hernandez~Garcia, P.~Gomez~Esteban, H.~Liu, V.~Nair, S.~Matu,
+A.~Mazel, M.~Selescu, E.~Senft, S.~Thill, B.~Vanderborght, D.~Vernon, and
+T.~Ziemke, ``The dream dataset: Supporting a data-driven study of autism
+spectrum disorder and robot enhanced therapy,'' \emph{PLOS ONE}, vol.~15, p.
+e0236939, 08 2020.
+
+\bibitem{132}
+A.~Abdulrahman, I.~Hadi, and Y.~Rajihy, ``Gait and full body movement dataset
+of autistic children classified by rough set classifier,'' \emph{Journal of
+	Physics Conference Series}, vol. 1818, p. 12201, 03 2021.
+
+\bibitem{133}
+A.~Savran, N.~Alyuz, H.~Dibeklioglu, O.~Çeliktutan, B.~Gokberk, B.~Sankur, and
+L.~Akarun, ``Bosphorus database for 3d face analysis,'' 01 2008, pp. 47--56.
+
+\bibitem{134}
+S.~M. Mavadati, M.~H. Mahoor, K.~Bartlett, P.~Trinh, and J.~F. Cohn, ``Disfa: A
+spontaneous facial action intensity database,'' \emph{IEEE Transactions on
+	Affective Computing}, vol.~4, no.~2, pp. 151--160, 2013.
+
+\bibitem{135}
+G.~McKeown, M.~F. Valstar, R.~Cowie, and M.~Pantic, ``The semaine corpus of
+emotionally coloured character interactions,'' in \emph{2010 IEEE
+	International Conference on Multimedia and Expo}, 2010, pp. 1079--1084.
+
+\bibitem{136}
+X.~Zhang, L.~Yin, J.~F. Cohn, S.~Canavan, M.~Reale, A.~Horowitz, P.~Liu, and
+J.~M. Girard, ``Bp4d-spontaneous: a high-resolution spontaneous 3d dynamic
+facial expression database,'' \emph{Image and Vision Computing}, vol.~32,
+no.~10, pp. 692--706, 2014.
+
+\bibitem{149}
+N.~Payakachat, J.~Tilford, and W.~Ungar, ``National database for autism
+research (ndar): Big data opportunities for health services research and
+health technology assessment,'' \emph{PharmacoEconomics}, vol.~34, pp. 1--12,
+10 2015.
+
+\bibitem{activis}
+A.~Ali, F.~F. Negin, F.~F. Bremond, and S.~Th{\"u}mmler, ``{Video-based
+	Behavior Understanding of Children for Objective Diagnosis of Autism},'' in
+\emph{{VISAPP 2022 - 17th International Conference on Computer Vision Theory
+		and Applications}}, 2022.
+
+\bibitem{pose_d}
+J.~Wang, Z.~Liu, Y.~Wu, and J.~Yuan, ``Mining actionlet ensemble for action
+recognition with depth cameras,'' in \emph{2012 IEEE Conference on Computer
+	Vision and Pattern Recognition}, 2012, pp. 1290--1297.
+
+\bibitem{pose_d2}
+A.-C. Popescu, I.~Mocanu, and B.~Cramariuc, ``Fusion mechanisms for human
+activity recognition using automated machine learning,'' \emph{IEEE Access},
+vol.~8, 2020.
+
+\bibitem{KDEF}
+D.~Lundqvist, A.~Flykt, and A.~Öhman, ``Karolinska directed emotional faces
+(kdef),'' 1998.
+
+\bibitem{fer2013}
+I.~J. Goodfellow, D.~Erhan, P.~L. Carrier, A.~Courville, M.~Mirza, B.~Hamner,
+W.~Cukierski, Y.~Tang, D.~Thaler, D.-H. Lee, Y.~Zhou, C.~Ramaiah, F.~Feng,
+R.~Li, X.~Wang, D.~Athanasakis, J.~Shawe-Taylor, M.~Milakov, J.~Park,
+R.~Ionescu, M.~Popescu, C.~Grozea, J.~Bergstra, J.~Xie, L.~Romaszko, B.~Xu,
+Z.~Chuang, and Y.~Bengio, ``Challenges in representation learning: A report
+on three machine learning contests,'' 2013.
+
+\bibitem{103}
+G.-J. Vanaken, I.~Noens, J.~Steyaert, L.~van Esch, P.~Warreyn, and K.~Hens,
+``The earlier, the better? an in-depth interview study on the ethics of early
+detection with parents of children at an elevated likelihood for autism,''
+\emph{Journal of Autism and Developmental Disorders}, pp. 1--15, 2023.
+
+\bibitem{37}
+M.~Khodatars, A.~Shoeibi, D.~Sadeghi, N.~Ghassemi, M.~Jafari, P.~Moridian,
+A.~Khadem, R.~Alizadehsani, A.~Zare, Y.~Kong, A.~Khosravi, S.~Nahavandi,
+S.~Hussain, U.~Acharya, and M.~Berk, ``Deep learning for neuroimaging-based
+diagnosis and rehabilitation of autism spectrum disorder: A review,''
+\emph{Computers in Biology and Medicine}, vol. 139, p. 104949, 12 2021.
+
+\bibitem{104}
+E.~Kang, K.~D. Gadow, and M.~D. Lerner, ``Atypical communication
+characteristics, differential diagnosis, and the autism spectrum disorder
+phenotype in youth,'' \emph{Journal of Clinical Child \& Adolescent
+	Psychology}, vol.~49, no.~2, pp. 251--263, 2020.
+
+\bibitem{107}
+D.~D. Khudhur and S.~D. Khudhur, ``The classification of autism spectrum
+disorder by machine learning methods on multiple datasets for four age
+groups,'' \emph{Measurement: Sensors}, vol.~27, p. 100774, 2023.
+
+\bibitem{108}
+M.~D. Hossain, M.~A. Kabir, A.~Anwar, and M.~Z. Islam, ``Detecting autism
+spectrum disorder using machine learning techniques: An experimental analysis
+on toddler, child, adolescent and adult datasets,'' \emph{Health Information
+	Science and Systems}, vol.~9, pp. 1--13, 2021.
+
+\bibitem{109}
+J.~Guti{\'e}rrez, Z.~Che, G.~Zhai, and P.~Le~Callet, ``Saliency4asd: Challenge,
+dataset and tools for visual attention modeling for autism spectrum
+disorder,'' \emph{Signal Processing: Image Communication}, vol.~92, p.
+116092, 2021.
+
+\bibitem{49}
+L.-A.~R. Sacrey, J.~A. Bennett, and L.~Zwaigenbaum, ``Early infant development
+and intervention for autism spectrum disorder,'' \emph{Journal of child
+	neurology}, vol.~30, no.~14, pp. 1921--1929, 2015.
+
+\bibitem{59}
+P.~Wei, D.~Ahmedt-Aristizabal, H.~Gammulle, S.~Denman, and A.~Armin,
+``Vision-based activity recognition in children with autism-related
+behaviors,'' \emph{Heliyon}, vol.~9, p. e16763, 06 2023.
+
+\bibitem{73}
+I.~Ahmed, E.~Senan, T.~Rassem, M.~Ali, H.~Shatnawi, S.~Alwazer, and
+M.~Alshahrani, ``Eye tracking-based diagnosis and early detection of autism
+spectrum disorder using machine learning and deep learning techniques,''
+\emph{Electronics}, vol.~11, p. 530, 02 2022.
+
+\bibitem{151}
+P.~R. Krishnappa~Babu and U.~Lahiri, ``Classification approach for
+understanding implications of emotions using eye-gaze,'' \emph{Journal of
+	Ambient Intelligence and Humanized Computing}, vol.~11, 07 2020.
+
+\bibitem{152}
+S.~Chen and Q.~Zhao, ``Attention-based autism spectrum disorder screening with
+privileged modality,'' 10 2019, pp. 1181--1190.
+
+\bibitem{72}
+S.~Rahman, S.~Rahman, O.~Shahid, M.~T. Abdullah, and J.~A. Sourov,
+``Classifying eye-tracking data using saliency maps,'' in \emph{2020 25th
+	International Conference on Pattern Recognition (ICPR)}, 2021, pp.
+9288--9295.
+
+\bibitem{153}
+M.~Jiang and Q.~Zhao, ``Learning visual attention to identify people with
+autism spectrum disorder,'' 10 2017.
+
+\bibitem{70}
+S.~Liang, A.~Q.~M. Sabri, F.~Alnajjar, and C.~K. Loo, ``Autism spectrum
+self-stimulatory behaviors classification using explainable temporal
+coherency deep features and svm classifier,'' \emph{IEEE Access}, vol.~9, pp.
+34\,264--34\,275, 2021.
+
+\bibitem{x16}
+V.~S.~P. Patnam, F.~T. George, K.~George, and A.~Verma, ``Deep learning based
+recognition of meltdown in autistic kids,'' in \emph{2017 IEEE International
+	Conference on Healthcare Informatics (ICHI)}, 2017, pp. 391--396.
+
+\bibitem{150}
+S.~Wang, M.~Jiang, X.~M. Duchesne, E.~Laugeson, D.~Kennedy, R.~Adolphs, and
+Q.~Zhao, ``Atypical visual saliency in autism spectrum disorder quantified
+through model-based eye tracking,'' \emph{Neuron}, 10 2015.
+
+\bibitem{154}
+Y.~Tao and M.-L. Shyu, ``Sp-asdnet: Cnn-lstm based asd classification model
+using observer scanpaths,'' 07 2019, pp. 641--646.
+
+\bibitem{50}
+J.~Huang, H.~Wang, Q.~Wu, J.~Yin, H.~Zhou, and Y.~He, ``Clinical research on
+neurological and psychiatric diagnosis and monitoring using wearable devices:
+A literature review,'' \emph{Interdisciplinary Medicine}, p. e20230037.
+
+\bibitem{51}
+A.~Q. Alban, A.~Y. Alhaddad, A.~Al-Ali, W.-C. So, O.~Connor, M.~Ayesh,
+U.~Ahmed~Qidwai, and J.-J. Cabibihan, ``Heart rate as a predictor of
+challenging behaviours among children with autism from wearable sensors in
+social robot interactions,'' \emph{Robotics}, vol.~12, no.~2, 2023.
+
+\bibitem{129}
+U.~A. Siddiqui, F.~Ullah, A.~Iqbal, A.~Khan, R.~Ullah, S.~Paracha, H.~Shahzad,
+and K.-S. Kwak, ``Wearable-sensors-based platform for gesture recognition of
+autism spectrum disorder children using machine learning algorithms,''
+\emph{Sensors}, vol.~21, no.~10, p. 3319, 2021.
+
+\bibitem{118}
+A.~Sundas, S.~Badotra, S.~Rani, and R.~Gyaang, ``Evaluation of autism spectrum
+disorder based on the healthcare by using artificial intelligence
+strategies,'' \emph{Journal of Sensors}, vol. 2023, no.~1, p. 5382375, 2023.
+
+\bibitem{75}
+H.~C. Hazlett, H.~Gu, B.~C. Munsell, S.~H. Kim, M.~Styner, J.~J. Wolff, J.~T.
+Elison, M.~R. Swanson, H.~Zhu, K.~N. Botteron \emph{et~al.}, ``Early brain
+development in infants at high risk for autism spectrum disorder,''
+\emph{Nature}, vol. 542, no. 7641, pp. 348--351, 2017.
+
+\bibitem{76}
+H.~Zhang, R.~Li, X.~Wen, Q.~Li, and X.~Wu, ``Altered time-frequency feature in
+default mode network of autism based on improved hilbert-huang transform,''
+\emph{IEEE journal of biomedical and health informatics}, vol.~25, no.~2, pp.
+485--492, 2020.
+
+\bibitem{77}
+M.~Kikuchi, Y.~Yoshimura, K.~Mutou, and Y.~Minabe, ``Magnetoencephalography in
+the study of children with autism spectrum disorder,'' \emph{Psychiatry and
+	clinical neurosciences}, vol.~70, no.~2, pp. 74--88, 2016.
+
+\bibitem{78}
+J.~Han, K.~Zeng, J.~Kang, Z.~Tong, E.~Cai, H.~Chen, M.~Ding, Y.~Gu, G.~Ouyang,
+and X.~Li, ``Development of brain network in children with autism from early
+childhood to late childhood,'' \emph{Neuroscience}, vol. 367, pp. 134--146,
+2017.
+
+\bibitem{81}
+S.~Ibrahim, R.~Djemal, and A.~Alsuwailem, ``Electroencephalography (eeg) signal
+processing for epilepsy and autism spectrum disorder diagnosis,''
+\emph{Biocybernetics and Biomedical Engineering}, vol.~38, no.~1, pp. 16--26,
+2018.
+
+\bibitem{82}
+T.-H. Pham, J.~Vicnesh, J.~K.~E. Wei, S.~L. Oh, N.~Arunkumar, E.~W. Abdulhay,
+E.~J. Ciaccio, and U.~R. Acharya, ``Autism spectrum disorder diagnostic
+system using hos bispectrum with eeg signals,'' \emph{International journal
+	of environmental research and public health}, vol.~17, no.~3, p. 971, 2020.
+
+\bibitem{83}
+D.~Haputhanthri, G.~Brihadiswaran, S.~Gunathilaka, D.~Meedeniya, S.~Jayarathna,
+M.~Jaime, and C.~Harshaw, ``Integration of facial thermography in eeg-based
+classification of asd,'' \emph{International Journal of Automation and
+	Computing}, vol.~17, no.~6, pp. 837--854, 2020.
+
+\bibitem{84}
+J.~Kang, T.~Zhou, J.~Han, and X.~Li, ``Eeg-based multi-feature fusion
+assessment for autism,'' \emph{Journal of Clinical Neuroscience}, vol.~56,
+pp. 101--107, 2018.
+
+\bibitem{85}
+A.~Sahi, P.~Rai, S.~Oh, M.~Ramasamy, R.~E. Harbaugh, and V.~K. Varadan,
+``Neural activity based biofeedback therapy for autism spectrum disorder
+through wearable wireless textile eeg monitoring system,'' in
+\emph{Nanosensors, biosensors, and info-tech sensors and systems 2014}, vol.
+9060.\hskip 1em plus 0.5em minus 0.4em\relax SPIE, 2014, pp. 73--81.
+
+\bibitem{86}
+T.~Sinha, M.~V. Munot, and R.~Sreemathy, ``An efficient approach for detection
+of autism spectrum disorder using electroencephalography signal,'' \emph{IETE
+	Journal of Research}, vol.~68, no.~2, pp. 824--832, 2022.
+
+\bibitem{87}
+M.~Baygin, S.~Dogan, T.~Tuncer, P.~D. Barua, O.~Faust, N.~Arunkumar, E.~W.
+Abdulhay, E.~E. Palmer, and U.~R. Acharya, ``Automated asd detection using
+hybrid deep lightweight features extracted from eeg signals,''
+\emph{Computers in Biology and Medicine}, vol. 134, p. 104548, 2021.
+
+\bibitem{88}
+W.~J. Bosl, H.~Tager-Flusberg, and C.~A. Nelson, ``Eeg analytics for early
+detection of autism spectrum disorder: a data-driven approach,''
+\emph{Scientific reports}, vol.~8, no.~1, p. 6828, 2018.
+
+\bibitem{89}
+G.~Brihadiswaran, D.~Haputhanthri, S.~Gunathilaka, D.~Meedeniya, and
+S.~Jayarathna, ``Eeg-based processing and classification methodologies for
+autism spectrum disorder: A review,'' \emph{Journal of Computer Science},
+vol.~15, no.~8, 2019.
+
+\bibitem{91}
+E.~Grossi, C.~Olivieri, and M.~Buscema, ``Diagnosis of autism through eeg
+processed by advanced computational algorithms: A pilot study,''
+\emph{Computer methods and programs in biomedicine}, vol. 142, pp. 73--79,
+2017.
+
+\bibitem{92}
+G.~Bouallegue, R.~Djemal, S.~Alshebeili, and H.~Aldhalaan, ``A dynamic
+filtering df-rnn deep-learning-based approach for eeg-based neurological
+disorders diagnosis,'' \emph{IEEE Access}, vol.~8, pp. 206\,992--207\,007, 01
+2020.
+
+\bibitem{x5}
+A.~J. Masino, D.~Forsyth, H.~Nuske, J.~Herrington, J.~Pennington,
+Y.~Kushleyeva, and C.~P. Bonafide, ``m-health and autism: Recognizing stress
+and anxiety with machine learning and wearables data,'' in \emph{2019 IEEE
+	32nd International Symposium on Computer-Based Medical Systems (CBMS)}, 2019,
+pp. 714--719.
+
+\bibitem{x6}
+A.~Q. Alban, M.~Ayesh, A.~Y. Alhaddad, A.~Khalid Al-Ali, W.~C. So, O.~Connor,
+and J.-J. Cabibihan, ``Detection of challenging behaviours of children with
+autism using wearable sensors during interactions with social robots,'' in
+\emph{2021 30th IEEE International Conference on Robot \& Human Interactive
+	Communication (RO-MAN)}, 2021, pp. 852--857.
+
+\bibitem{x7}
+T.~Ghosh, M.~Al~Banna, M.~S. Kaiser, K.~Taher, and M.~Mahmud, ``A monitoring
+system for patients of autism spectrum disorder using artificial
+intelligence,'' 09 2020.
+
+\bibitem{x8}
+M.~Hosseinzadeh, J.~Koohpayehzadeh, A.~Omar~Bali, F.~Rad, A.~Souri,
+A.~Mazaherinezhad, A.~Rezapour, and M.~Bohlouli, ``A review on diagnostic
+autism spectrum disorder approaches based on the internet of things and
+machine learning,'' \emph{The Journal of Supercomputing}, vol.~77, 03 2021.
+
+\bibitem{x9}
+J.-J. Cabibihan, H.~Javed, M.~Aldosari, T.~Frazier, and H.~Bashir, ``Sensing
+technologies for autism spectrum disorder screening and intervention,''
+\emph{Sensors}, vol.~17, p.~46, 12 2016.
+
+\bibitem{x11}
+N.~Mohammadian~Rad, S.~M. Kia, C.~Zarbo, T.~van Laarhoven, G.~Jurman,
+P.~Venuti, E.~Marchiori, and C.~Furlanello, ``Deep learning for automatic
+stereotypical motor movement detection using wearable sensors in autism
+spectrum disorders,'' \emph{Signal Processing}, vol. 144, 09 2017.
+
+\bibitem{56}
+Y.-C. Cheng, Y.-C. Huang, and W.-L. Huang, ``Heart rate variability in
+individuals with autism spectrum disorders: A meta-analysis,''
+\emph{Neuroscience \& Biobehavioral Reviews}, vol. 118, pp. 463--471, 2020.
+
+\bibitem{125}
+F.~Fioriello, A.~Maugeri, L.~D’Alvia, E.~Pittella, E.~Piuzzi, E.~Rizzuto,
+Z.~Del~Prete, F.~Manti, and C.~Sogos, ``A wearable heart rate measurement
+device for children with autism spectrum disorder,'' \emph{Scientific
+	Reports}, vol.~10, no.~1, p. 18659, 2020.
+
+\bibitem{130}
+B.~Anandhi, S.~Jerritta, I.~Anusuya, and H.~Das, ``Time domain analysis of
+heart rate variability signals in valence recognition for children with
+autism spectrum disorder (asd),'' \emph{IRBM}, vol.~43, no.~5, pp. 380--390,
+2022.
+
+\bibitem{119}
+T.~V. de~Araujo, A.~R{\"u}esch, A.~Bankwitz, M.~Rufer, B.~Kleim, and
+S.~Olbrich, ``Autism spectrum disorders in adults and the autonomic nervous
+system: Heart rate variability markers in the diagnostic procedure,''
+\emph{Journal of Psychiatric Research}, vol. 164, pp. 235--242, 2023.
+
+\bibitem{52}
+M.~G. Frasch, C.~Shen, H.-T. Wu, A.~Mueller, E.~Neuhaus, R.~A. Bernier,
+D.~Kamara, and T.~P. Beauchaine, ``Brief report: can a composite heart rate
+variability biomarker shed new insights about autism spectrum disorder in
+school-aged children?'' \emph{Journal of Autism and Developmental Disorders},
+vol.~51, pp. 346--356, 2021.
+
+\bibitem{53}
+L.~Billeci, A.~Tonacci, A.~Narzisi, Z.~Manigrasso, M.~Varanini, F.~Fulceri,
+C.~Lattarulo, S.~Calderoni, and F.~Muratori, ``Heart rate variability during
+a joint attention task in toddlers with autism spectrum disorders,''
+\emph{Frontiers in physiology}, vol.~9, p. 467, 2018.
+
+\bibitem{90}
+M.~Hashemian and H.~Pourghassem, ``Diagnosing autism spectrum disorders based
+on eeg analysis: A survey,'' \emph{Neurophysiology}, vol.~46, no.~2, pp.
+183--195, 2014.
+
+\bibitem{121}
+M.~Raki{\'c}, M.~Cabezas, K.~Kushibar, A.~Oliver, and X.~Llad{\'o}, ``Improving
+the detection of autism spectrum disorder by combining structural and
+functional mri information,'' \emph{NeuroImage: Clinical}, vol.~25, p.
+102181, 2020.
+
+\bibitem{123}
+J.~Zhang, F.~Feng, T.~Han, X.~Gong, and F.~Duan, ``Detection of autism spectrum
+disorder using fmri functional connectivity with feature selection and deep
+learning,'' \emph{Cognitive Computation}, vol.~15, no.~4, pp. 1106--1117,
+2023.
+
+\bibitem{79}
+T.~Eslami, V.~Mirjalili, A.~Fong, A.~R. Laird, and F.~Saeed, ``Asd-diagnet: A
+hybrid learning approach for detection of autism spectrum disorder using fmri
+data,'' \emph{Frontiers in Neuroinformatics}, vol.~13, 2019.
+
+\bibitem{62}
+M.~Samad, N.~Diawara, J.~Bobzien, J.~Harrington, M.~Witherow, and
+K.~Iftekharuddin, ``A feasibility study of autism behavioral markers in
+spontaneous facial, visual, and hand movement response data,'' \emph{IEEE
+	Transactions on Neural Systems and Rehabilitation Engineering}, vol.~PP, pp.
+1--1, 10 2017.
+
+\bibitem{63}
+M.~Del~Coco, M.~Leo, P.~Carcagnì, P.~Spagnolo, P.~L. Mazzeo, G.~Bernava,
+M.~Flavia, G.~Pioggia, and C.~Distante, ``A computer vision based approach
+for understanding emotional involvements in children with autism spectrum
+disorders,'' 10 2017, pp. 1401--1407.
+
+\bibitem{x12}
+J.~Liu, Z.~Wang, H.~Qin, Y.~Wang, J.~Deng, H.~Li, Q.~Xu, X.~Xu, and H.~Liu,
+``Social recognition of joint attention cycles in children with autism
+spectrum disorders,'' \emph{IEEE Transactions on Biomedical Engineering},
+vol.~71, no.~1, pp. 237--246, 2024.
+
+\bibitem{74}
+C.~Wu, S.~Liaqat, S.-c. Cheung, C.-N. Chuah, and S.~Ozonoff, ``Predicting
+autism diagnosis using image with fixations and synthetic saccade patterns,''
+in \emph{2019 IEEE International Conference on Multimedia \& Expo Workshops
+	(ICMEW)}, 2019, pp. 647--650.
+
+\bibitem{124}
+M.~E. Minissi, I.~A. Chicchi~Giglioli, F.~Mantovani, and M.~Alcaniz~Raya,
+``Assessment of the autism spectrum disorder based on machine learning and
+social visual attention: A systematic review,'' \emph{Journal of Autism and
+	Developmental Disorders}, vol.~52, no.~5, pp. 2187--2202, 2022.
+
+\bibitem{64}
+A.~Ali, F.~Negin, and S.~Thümmler, ``Video-based behavior understanding of
+children for objective diagnosis of autism,'' 01 2022, pp. 475--484.
+
+\bibitem{x3}
+S.~Zahan, Z.~Gilani, G.~M. Hassan, and A.~Mian, ``Human gesture and gait
+analysis for autism detection,'' in \emph{2023 IEEE/CVF Conference on
+	Computer Vision and Pattern Recognition Workshops (CVPRW)}.\hskip 1em plus
+0.5em minus 0.4em\relax IEEE Computer Society, 2023, pp. 3328--3337.
+
+\bibitem{128}
+V.~G. Prakash, M.~Kohli, A.~P. Prathosh, M.~Juneja, M.~Gupta, S.~Sairam,
+S.~Sitaraman, A.~S. Bangalore, J.~V.~S. Kommu, L.~Saini \emph{et~al.},
+``Video-based real-time assessment and diagnosis of autism spectrum disorder
+using deep neural networks,'' \emph{Expert Systems}, p. e13253, 2023.
+
+\bibitem{61}
+Y.~Zhang, Y.~Tian, P.~Wu, and D.~Chen, ``Application of skeleton data and long
+short-term memory in action recognition of children with autism spectrum
+disorder,'' \emph{Sensors}, vol.~21, p. 411, 01 2021.
+
+\bibitem{60}
+P.~W. 0001, A.~Kline, and O.~C. Mutlu, ``Activity recognition with moving
+cameras and few training examples: Applications for detection of
+autism-related headbanging,'' in \emph{CHI '21: CHI Conference on Human
+	Factors in Computing Systems, Virtual Event / Yokohama Japan, May 8-13, 2021,
+	Extended Abstracts}.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2021.
+
+\bibitem{122}
+N.~Kojovic, S.~Natraj, S.~P. Mohanty, T.~Maillart, and M.~Schaer, ``Using 2d
+video-based pose estimation for automated prediction of autism spectrum
+disorders in young children,'' \emph{Scientific Reports}, vol.~11, no.~1, p.
+15069, 2021.
+
+\bibitem{x10}
+M.~Hossain, D.~Kaushik, S.~Sakib, and I.~Sarker, ``A hybrid deep learning
+framework for daily living human activity recognition with cluster-based
+video summarization,'' \emph{Multimedia Tools and Applications}, pp. 1--54,
+04 2024.
+
+\bibitem{55}
+J.~Shan, Y.~Gu, J.~Zhang, X.~Hu, H.~Wu, T.~Yuan, and D.~Zhao, ``A scoping
+review of physiological biomarkers in autism,'' \emph{Frontiers in
+	neuroscience}, vol.~17, p. 1269880, 2023.
+
+\bibitem{fus9}
+Y.-Q. Chen, F.-A. Lin, T.-Y. Yang, S.-C. Yeh, E.~Wu, J.~Poole, and C.~Shao, ``A
+vr-based training and intelligent assessment system integrated with
+multi-modal sensing for children with autism spectrum disorder,'' 10 2021,
+pp. 191--195.
+
+\bibitem{58}
+S.~Bereznak, K.~Ayres, L.~Mechling, and J.~Alexander, ``Video self-prompting
+and mobile technology to increase daily living and vocational independence
+for students with autism spectrum disorders,'' \emph{Journal of Developmental
+	and Physical Disabilities}, vol.~24, pp. 269--285, 06 2012.
+
+\bibitem{fus10_42}
+L.~Zwaigenbaum, S.~Bryson, and N.~Garon, ``Early identification of autism
+spectrum disorders,'' \emph{Behavioural Brain Research}, vol. 251, pp.
+133--146, 04 2013.
+
+\bibitem{fus10_43}
+M.~R. Talbott, S.~Dufek, L.~Zwaigenbaum, S.~Bryson, J.~Brian, I.~M. Smith, and
+S.~J. Rogers, ``Brief report: Preliminary feasibility of the tedi: A novel
+parent-administered telehealth assessment for autism spectrum disorder
+symptoms in the first year of life,'' \emph{Journal of Autism and
+	Developmental Disorders}, vol.~50, no.~9, pp. 3432--3439, 2020.
+
+\bibitem{fus10_44}
+A.~Steiner, \emph{Early Social-Communication Scales (ESCS)}.\hskip 1em plus
+0.5em minus 0.4em\relax Cham: Springer International Publishing, 2021, pp.
+1575--1576.
+
+\bibitem{fus10_41}
+N.~Qiu, C.~Tang, M.~Zhai, W.~Huang, J.~Weng, C.~Li, X.~Xiao, J.~Fu, L.~Zhang,
+T.~Xiao, H.~Fang, and X.~Ke, ``Application of the still-face paradigm in
+early screening for high-risk autism spectrum disorder in infants and
+toddlers,'' \emph{Frontiers in Pediatrics}, vol.~8, p. 290, 06 2020.
+
+\bibitem{71}
+T.~Nakano, K.~Tanaka, Y.~Endo, Y.~Yamane, T.~Yamamoto, Y.~Nakano, H.~Ohta,
+N.~Kato, and S.~Kitazawa, ``Atypical gaze patterns in children and adults
+with autism spectrum disorders dissociated from developmental changes in gaze
+behaviour,'' \emph{Proceedings of the Royal Society B: Biological Sciences},
+vol. 277, no. 1696, pp. 2935--2943, 2010.
+
+\bibitem{120}
+J.~Wang, L.~Zhang, Q.~Wang, L.~Chen, J.~Shi, X.~Chen, Z.~Li, and D.~Shen,
+``Multi-class asd classification based on functional connectivity and
+functional correlation tensor via multi-source domain adaptation and
+multi-view sparse representation,'' \emph{IEEE transactions on medical
+	imaging}, vol.~39, no.~10, pp. 3137--3147, 2020.
+
+\bibitem{80}
+H.~Sewani and R.~Kashef, ``An autoencoder-based deep learning classifier for
+efficient diagnosis of autism,'' \emph{Children}, vol.~7, p. 182, 10 2020.
+
+\bibitem{scq}
+S.~R. Chesnut, T.~Wei, L.~Barnard-Brak, and D.~M. Richman, ``A meta-analysis of
+the social communication questionnaire: Screening for autism spectrum
+disorder,'' \emph{Autism}, vol.~21, no.~8, pp. 920--928, 2017.
+
+\bibitem{137}
+L.~Vismara and S.~Rogers, ``The early start denver modela case study of an
+innovative practice,'' \emph{Journal of Early Intervention - J EARLY
+	INTERVENTION}, vol.~31, pp. 91--108, 09 2008.
+
+\bibitem{138}
+M.~Grissom, \emph{Childhood Autism Rating Scales}.\hskip 1em plus 0.5em minus
+0.4em\relax New York, NY: Springer New York, 2011, pp. 553--554.
+
+\bibitem{139}
+A.~Cassidy, \emph{Autism Behavior Checklist}.\hskip 1em plus 0.5em minus
+0.4em\relax New York, NY: Springer New York, 2013, pp. 342--343.
+
+\bibitem{140}
+S.~Chakraborty, P.~Thomas, T.~Bhatia, V.~L. Nimgaonkar, and S.~N. Deshpande,
+``Assessment of severity of autism using the indian scale for assessment of
+autism,'' \emph{Indian Journal of Psychological Medicine}, vol.~37, no.~2,
+pp. 169--174, 2015.
+
+\bibitem{141}
+M.~Lewis, \emph{Early Language Milestone Scale}.\hskip 1em plus 0.5em minus
+0.4em\relax Springer New York, 2013, pp. 1032--1033.
+
+\bibitem{142}
+D.~Dutt, D.~Jain, and D.~Dutt, ``Early detection of autism – comparison of
+two screening tools,'' \emph{Pediatric Review: International Journal of
+	Pediatric Research}, vol.~4, pp. 688--693, 11 2017.
+
+\bibitem{143}
+J.~Robinson, \emph{Gilliam Autism Rating Scale (GARS)}.\hskip 1em plus 0.5em
+minus 0.4em\relax Springer New York, 2013, pp. 1441--1444.
+
+\bibitem{144}
+J.~N. Constantino, \emph{Social Responsiveness Scale}.\hskip 1em plus 0.5em
+minus 0.4em\relax Springer International Publishing, 2021, pp. 4457--4467.
+
+\bibitem{145}
+S.~L. Einfeld and B.~J. Tonge, ``The developmental behavior checklist: The
+development and validation of an instrument to assess behavioral and
+emotional disturbance in children and adolescents with mental retardation,''
+\emph{Journal of Autism and Developmental Disorders}, vol.~25, no.~2, pp.
+81--104, Apr 1995.
+
+\bibitem{146}
+M.~Juneja, D.~Mishra, P.~S.~S. Russell, S.~Gulati, and V.~Deshmukh, ``Inclen
+diagnostic tool for autism spectrum disorder (indt-asd): Development and
+validation,'' \emph{Indian Pediatrics}, vol.~51, no.~5, pp. 359--365, May
+2014.
+
+\bibitem{147}
+D.~V. Cicchetti, A.~S. Carter, and S.~A.~O. Gray, \emph{Vineland Adaptive
+	Behavior Scales}.\hskip 1em plus 0.5em minus 0.4em\relax Springer New York,
+2013, pp. 3281--3284.
+
+\bibitem{148}
+S.~Hardy, L.~Haisley, C.~Manning, and D.~Fein, ``Can screening with the ages
+and stages questionnaire detect autism?'' \emph{Journal of Developmental \&
+	Behavioral Pediatrics}, vol.~36, no.~7, 2015.
+
+\bibitem{fus2}
+Q.~Wei, X.~Xu, X.~Xu, and Q.~Cheng, ``Early identification of autism spectrum
+disorder by multi-instrument fusion: A clinically applicable machine learning
+approach,'' \emph{Psychiatry Research}, vol. 320, p. 115050, 02 2023.
+
+\bibitem{fus3}
+J.~Moon, F.~Ke, Z.~Sokolikj, and S.~Chakraborty, ``Applying multimodal data
+fusion to track autistic adolescents’ representational flexibility
+development during virtual reality-based training,'' \emph{Computers \&
+	Education X Reality}, 03 2024.
+
+\bibitem{fus4}
+S.~K. Khare, S.~March, P.~D. Barua, V.~M. Gadre, and U.~R. Acharya,
+``Application of data fusion for automated detection of children with
+developmental and mental disorders: A systematic review of the last decade,''
+\emph{Information Fusion}, p. 101898, 2023.
+
+\bibitem{fus5}
+V.~Prakash, M.~Kohli, S.~Kohli, A.~P. Prathosh, T.~Wadhera, D.~Das,
+D.~Panigrahi, and J.~V.~S. Kommu, ``Computer vision-based assessment of
+autistic children: Analyzing interactions, emotions, human pose, and life
+skills,'' \emph{IEEE Access}, vol.~PP, pp. 1--1, 01 2023.
+
+\bibitem{fus6}
+J.~Chen, M.~Liao, G.~Wang, and C.~Chen, ``An intelligent multimodal framework
+for identifying children with autism spectrum disorder,'' \emph{International
+	Journal of Applied Mathematics and Computer Science}, vol.~30, 01 2020.
+
+\bibitem{fus7}
+S.~Ak and A.~R, ``Figs-deaf: an novel implementation of hybrid deep learning
+algorithm to predict autism spectrum disorders using facial fused gait
+features,'' \emph{Distributed and Parallel Databases}, vol.~40, 08 2021.
+
+\bibitem{fus8}
+H.~Wang, H.~Jing, J.~Yang, C.~Liu, L.~Hu, G.~Tao, Z.~Zhao, and N.~Shen,
+``Identifying autism spectrum disorder from multi-modal data with
+privacy-preserving,'' \emph{npj Mental Health Research}, vol.~3, 05 2024.
+
+\bibitem{fus11}
+B.~Cociu, S.~Das, L.~Billeci, W.~Jamal, K.~Maharatna, S.~Calderoni, A.~Narzisi,
+and F.~Muratori, ``Multimodal functional and structural brain connectivity
+analysis in autism: A preliminary integrated approach with eeg, fmri and
+dti,'' \emph{IEEE Transactions on Cognitive and Developmental Systems},
+vol.~PP, pp. 1--1, 03 2017.
+
+\bibitem{fus12}
+L.~Mash, B.~Keehn, A.~Linke, T.~Liu, J.~Helm, F.~Haist, J.~Townsend, and R.-A.
+Müller, ``Atypical relationships between spontaneous eeg and fmri activity
+in autism,'' \emph{Brain Connectivity}, vol.~10, 12 2019.
+
+\bibitem{resnet}
+K.~He, X.~Zhang, S.~Ren, and J.~Sun, ``Deep residual learning for image
+recognition,'' in \emph{2016 IEEE Conference on Computer Vision and Pattern
+	Recognition (CVPR)}, 2016, pp. 770--778.
+
+\bibitem{kin}
+W.~Kay, J.~Carreira, K.~Simonyan, and B.~Zhang, ``The kinetics human action
+video dataset,'' 2017. [Online]. Available:
+\url{https://arxiv.org/abs/1705.06950}
+
+\bibitem{mit}
+M.~Monfort, A.~Andonian, B.~Zhou, and K.~Ramakrishnan, ``Moments in time
+dataset: one million videos for event understanding,'' 2019. [Online].
+Available: \url{https://arxiv.org/abs/1801.03150}
+
+\bibitem{hmdb}
+H.~Kuehne, H.~Jhuang, E.~Garrote, T.~Poggio, and T.~Serre, ``Hmdb: A large
+video database for human motion recognition,'' in \emph{2011 International
+	Conference on Computer Vision}, 2011, pp. 2556--2563.
+    
+\bibitem{prema}
+P.~Nedungadi, S.~M. Shah, M.~A. Stokes, V.~Kumar~Nair, A.~Moorkoth, and
+  R.~Raman, ``Mapping autism’s research landscape: trends in autism screening
+  and its alignment with sustainable development goals,'' \emph{Frontiers in
+  Psychiatry}, vol.~14, p. 1294254, 2024.
+
+\bibitem{nam}
+N.~J. Viswadutt, D.~K. Vemula, M.~Shardunya, N.~Paleti, and K.~Namitha, ``Smart
+  healthcare iot: Deep learning-driven patient monitoring and diagnosis,'' in
+  \emph{2023 9th International Conference on Smart Structures and Systems
+  (ICSSS)}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2023, pp. 1--6.
+
+\bibitem{supritha}
+R.~Supritha \emph{et~al.}, ``Deep learning for autism detection using eye
+  tracking scanpaths,'' in \emph{2024 IEEE International Conference on
+  Interdisciplinary Approaches in Technology and Management for Social
+  Innovation (IATMSI)}, vol.~2.\hskip 1em plus 0.5em minus 0.4em\relax IEEE,
+  2024, pp. 1--6.
+
+\bibitem{behave}
+S.~Akshay, P.~Kavya~Bijith, S.~Sanjana, and J.~Amudha, ``ibehave: Behaviour
+  analysis using eye gaze metrices,'' in \emph{International Conference on
+  Pattern Recognition and Machine Intelligence}.\hskip 1em plus 0.5em minus
+  0.4em\relax Springer, 2023, pp. 260--269.
+
+\bibitem{varsha}
+P.~Varsha \emph{et~al.}, ``Identification of autism spectrum disorder in
+  children from facial features using deep learning,'' in \emph{2024 Fourth
+  International Conference on Advances in Electrical, Computing, Communication
+  and Sustainable Technologies (ICAECT)}.\hskip 1em plus 0.5em minus
+  0.4em\relax IEEE, 2024, pp. 1--6.
+
+\bibitem{mod}
+A.~John and T.~Singh, ``Mod-dhgn for autism segmentation,'' \emph{Procedia
+  Computer Science}, vol. 218, pp. 621--630, 2023.
+
+\end{thebibliography}
+\vskip 0pt plus 0fil
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1in,clip,keepaspectratio]{namit.png}}]{K. Namitha} received the Ph.D. degree in Computer Science and Engineering from Amrita Vishwa Vidyapeetham, Amritapuri, India. She is currently an Assistant Professor with the Department of Computer Science and Engineering, School of Computing, Amrita Vishwa Vidyapeetham, Amritapuri, Kerala, India. Her research interests include computer vision, machine learning, AI for disability studies, and video analytics.
+\end{IEEEbiography}
+\vskip -3.5pt plus 0fil
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1in,clip,keepaspectratio]{giris.png}}]{S. Girish} is currently pursuing the B.Tech. degree
+in Computer Science with Artificial Intelligence from the School of Computing, Amrita Vishwa Vidyapeetham, Amritapuri, Kerala, India. His current research interests include AI for neurodiversity, disability studies, and sustainable development.
+\end{IEEEbiography}
+\vskip -3.5pt plus 0fil
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1in,clip,keepaspectratio]{anuvi.png}}]{M. P. Anuvind} is currently pursuing the B.Tech. degree in Artificial Intelligence from the School of Computing, Amrita Vishwa Vidyapeetham, Amritapuri, Kerala, India. His current research interests include optimization and medical sciences.
+\end{IEEEbiography}
+\vskip -3.5pt plus 0fil
+\begin{IEEEbiography}[{\includegraphics[width=1.1in,height=1in,clip,keepaspectratio]{kumar.png}}]{R. S. Harish Kumar} is currently pursuing the B.Tech. degree in Artificial Intelligence from the School of Computing, Amrita Vishwa Vidyapeetham, Amritapuri, Kerala, India. His current research interests include deep learning, computer vision, and sustainable development.
+\end{IEEEbiography}
+\vskip -3.5pt plus 0fil
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1in,clip,keepaspectratio]{nair.png}}]{Harishankar Binu Nair} is currently pursuing a B.Tech. degree in Artificial Intelligence from the School of Computing, Amrita Vishwa Vidyapeetham, Amritapuri, Kerala, India. His current research interests include natural language processing, robotics, and AI for disability studies.
+\end{IEEEbiography}
+\vskip -3.5pt plus 0fil
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1in,clip,keepaspectratio]{chand.png}}]{Dhanya Chandran} received the Ph.D. degree from the National Institute of Mental Health and NeuroscienceS (NIMHANS), Bengaluru, India. Her Ph.D. research focused on the development of a novel social cognition intervention for Schizophrenia Spectrum Disorders. She is a Clinical Psychologist registered with the Rehabilitation Council of India (RCI) and currently serves as an Associate Professor with the Department of Clinical Psychology, School of Medicine, Amrita Institute of Medical Sciences, Kochi, India. Her research interests include psychotherapy, neuropsychology, cognitive rehabilitation, and social cognitive affective neurosciences. 
+\end{IEEEbiography}
+\vskip -3.5pt plus 0fil
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1in,clip,keepaspectratio]{babu.png}}]{Sooraj K Babu} received the M.Tech. degree in E.Learning Technologies from Amrita Vishwa Vidyapeetham, India. He is currently pursuing the Ph.D. degree in Human Computer Interaction with the Games Engineering Research Group at the University of Würzburg, Germany. He holds the position of AI/ML Scientist at Dr. Moopen’s iNEST healthcare incubator in Kerala, India. His research interests include recommender systems, evolutionary algorithms, virtual reality, serious games, and technology for social impact.
+\end{IEEEbiography}
+
+\vfill\pagebreak
+
+\end{document}
